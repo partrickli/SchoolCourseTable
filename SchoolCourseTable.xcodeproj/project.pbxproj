@@ -13,6 +13,8 @@
 		C01A52FF1F789F2D0020A83C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C01A52FD1F789F2D0020A83C /* Main.storyboard */; };
 		C01A53011F789F2D0020A83C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C01A53001F789F2D0020A83C /* Assets.xcassets */; };
 		C01A53041F789F2D0020A83C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C01A53021F789F2D0020A83C /* LaunchScreen.storyboard */; };
+		C01A530E1F78A1C20020A83C /* SchoolCourseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01A530D1F78A1C20020A83C /* SchoolCourseCell.swift */; };
+		C01A53101F78A4180020A83C /* CourseTableLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01A530F1F78A4180020A83C /* CourseTableLayout.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		C01A53001F789F2D0020A83C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C01A53031F789F2D0020A83C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C01A53051F789F2D0020A83C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C01A530D1F78A1C20020A83C /* SchoolCourseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SchoolCourseCell.swift; sourceTree = "<group>"; };
+		C01A530F1F78A4180020A83C /* CourseTableLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseTableLayout.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +63,8 @@
 				C01A52F71F789F2D0020A83C /* AppDelegate.swift */,
 				C01A52F91F789F2D0020A83C /* FirstViewController.swift */,
 				C01A52FB1F789F2D0020A83C /* SecondViewController.swift */,
+				C01A530D1F78A1C20020A83C /* SchoolCourseCell.swift */,
+				C01A530F1F78A4180020A83C /* CourseTableLayout.swift */,
 				C01A52FD1F789F2D0020A83C /* Main.storyboard */,
 				C01A53001F789F2D0020A83C /* Assets.xcassets */,
 				C01A53021F789F2D0020A83C /* LaunchScreen.storyboard */,
@@ -140,8 +146,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C01A530E1F78A1C20020A83C /* SchoolCourseCell.swift in Sources */,
 				C01A52FC1F789F2D0020A83C /* SecondViewController.swift in Sources */,
 				C01A52F81F789F2D0020A83C /* AppDelegate.swift in Sources */,
+				C01A53101F78A4180020A83C /* CourseTableLayout.swift in Sources */,
 				C01A52FA1F789F2D0020A83C /* FirstViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
