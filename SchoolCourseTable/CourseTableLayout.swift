@@ -8,15 +8,9 @@
 
 import UIKit
 
-protocol CourseTableLayoutDelegate: class {
-    func collectionView(_ collectionView: UICollectionView, heightForItemAt indexPath: IndexPath, with width: CGFloat) -> CGFloat
-}
-
 class CourseTableLayout: UICollectionViewLayout {
     
-    weak var delegate: CourseTableLayoutDelegate!
-
-    let numberOfColumns = 2
+    let numberOfColumns = 5
     
     var columnWidth: CGFloat {
         return collectionView!.bounds.width / CGFloat(numberOfColumns)
@@ -44,12 +38,13 @@ class CourseTableLayout: UICollectionViewLayout {
             
             let indexPath = IndexPath(item: item, section: 0)
             let currentColumn = item % numberOfColumns
-            let imageHeight: CGFloat = delegate.collectionView(collectionView, heightForItemAt: indexPath, with: columnWidth)
+            let imageHeight: CGFloat = columnWidth * 0.618
             
             xOffset = CGFloat(currentColumn) * columnWidth
             
             let attributes = UICollectionViewLayoutAttributes(forCellWith: indexPath)
-            attributes.frame = CGRect(x: xOffset, y: yOffset[currentColumn], width: columnWidth, height: imageHeight)
+            let cellFrame = CGRect(x: xOffset, y: yOffset[currentColumn], width: columnWidth, height: imageHeight)
+            attributes.frame = cellFrame.insetBy(dx: 1, dy: 1)
             cache.append(attributes)
             
             yOffset[currentColumn] += imageHeight

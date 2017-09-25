@@ -10,6 +10,11 @@ import UIKit
 
 class SchoolCourseCell: UICollectionViewCell {
     
-
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        backgroundColor = .white
+    }
     
+    @IBOutlet weak var courseLabel: UILabel!
+
 }
