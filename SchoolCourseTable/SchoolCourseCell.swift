@@ -13,6 +13,10 @@ class SchoolCourseCell: UICollectionViewCell {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         backgroundColor = .white
+        
+        layer.cornerRadius = 5
+        layer.masksToBounds = true
+        layer.borderWidth = 1
     }
     
     @IBOutlet weak var courseLabel: UILabel!

@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--课表-->
+        <!--总课表-->
         <scene sceneID="hNz-n2-bh7">
             <objects>
-                <viewController id="9pv-A4-QxB" customClass="FirstViewController" customModule="SchoolCourseTable" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="9pv-A4-QxB" customClass="CourseTableViewController" customModule="SchoolCourseTable" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Ia1-K6-d13"/>
                         <viewControllerLayoutGuide type="bottom" id="4ug-Mw-9AY"/>
@@ -22,32 +22,46 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="wYT-mB-8yr">
-                                <rect key="frame" x="0.0" y="20" width="375" height="598"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
-                                <collectionViewLayout key="collectionViewLayout" id="Rc1-Jn-Vzk" customClass="CourseTableLayout" customModule="SchoolCourseTable" customModuleProvider="target"/>
+                                <collectionViewLayout key="collectionViewLayout" id="BOJ-JT-sEQ" customClass="CourseTableLayout" customModule="SchoolCourseTable" customModuleProvider="target"/>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SchoolCourseCell" id="Teo-hc-fhb" customClass="SchoolCourseCell" customModule="SchoolCourseTable" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="152" height="79"/>
+                                        <rect key="frame" x="84" y="0.0" width="207" height="199"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="152" height="79"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="207" height="199"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jsl-y7-IBc">
-                                                    <rect key="frame" x="54" y="29" width="44" height="21"/>
-                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="1l1-ut-5OS">
+                                                    <rect key="frame" x="2" y="2" width="203" height="195"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="李老师" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LGh-Ug-nIc">
+                                                            <rect key="frame" x="78.5" y="0.0" width="46" height="174.5"/>
+                                                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                                            <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="语文" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jsl-y7-IBc">
+                                                            <rect key="frame" x="84" y="174.5" width="35" height="20.5"/>
+                                                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                            <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
                                             </subviews>
                                         </view>
-                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstItem="Jsl-y7-IBc" firstAttribute="centerX" secondItem="Teo-hc-fhb" secondAttribute="centerX" id="2Gu-am-fOd"/>
-                                            <constraint firstItem="Jsl-y7-IBc" firstAttribute="centerX" secondItem="Teo-hc-fhb" secondAttribute="centerX" id="RsA-YJ-ggZ"/>
-                                            <constraint firstItem="Jsl-y7-IBc" firstAttribute="centerY" secondItem="Teo-hc-fhb" secondAttribute="centerY" id="tI3-Yg-7xq"/>
+                                            <constraint firstItem="1l1-ut-5OS" firstAttribute="top" secondItem="Teo-hc-fhb" secondAttribute="topMargin" constant="2" id="a1R-LH-KfL"/>
+                                            <constraint firstAttribute="bottomMargin" secondItem="1l1-ut-5OS" secondAttribute="bottom" constant="2" id="gej-gu-fHz"/>
+                                            <constraint firstAttribute="trailingMargin" secondItem="1l1-ut-5OS" secondAttribute="trailing" constant="2" id="hvl-j4-qzg"/>
+                                            <constraint firstItem="1l1-ut-5OS" firstAttribute="leading" secondItem="Teo-hc-fhb" secondAttribute="leadingMargin" constant="2" id="m1C-vs-yQe"/>
                                         </constraints>
-                                        <size key="customSize" width="152" height="79"/>
+                                        <size key="customSize" width="207" height="199"/>
                                         <connections>
                                             <outlet property="courseLabel" destination="Jsl-y7-IBc" id="KJB-kn-iYX"/>
                                         </connections>
@@ -67,16 +81,19 @@
                             <constraint firstItem="4ug-Mw-9AY" firstAttribute="top" secondItem="wYT-mB-8yr" secondAttribute="bottom" id="z4I-A5-SeP"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="课表" image="first" id="acW-dT-cKf"/>
+                    <navigationItem key="navigationItem" title="总课表" id="v1v-Dx-749"/>
+                    <connections>
+                        <outlet property="courseTableCollectionView" destination="wYT-mB-8yr" id="d9R-LW-j5p"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="749.60000000000002" y="-320.68965517241384"/>
+            <point key="canvasLocation" x="1628" y="-322.48875562218893"/>
         </scene>
-        <!--教师-->
+        <!--老师们-->
         <scene sceneID="wg7-f3-ORb">
             <objects>
-                <viewController id="8rJ-Kc-sve" customClass="SecondViewController" customModule="SchoolCourseTable" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="8rJ-Kc-sve" customClass="TeachersViewController" customModule="SchoolCourseTable" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="L7p-HK-0SC"/>
                         <viewControllerLayoutGuide type="bottom" id="Djb-ko-YwX"/>
@@ -85,33 +102,201 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="Second View" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="zEq-FU-wV5">
-                                <rect key="frame" x="83" y="313" width="209.5" height="41.5"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="36"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loaded by SecondViewController" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NDk-cv-Gan">
-                                <rect key="frame" x="80" y="362.5" width="215" height="17"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="F5r-Sy-unp">
+                                <rect key="frame" x="16" y="64" width="343" height="554"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="sectionIndexBackgroundColor" red="0.3851390864" green="0.48727634079999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TeacherCell" rowHeight="120" id="Skv-sa-esb" customClass="TeacherCell" customModule="SchoolCourseTable" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="343" height="120"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Skv-sa-esb" id="QVg-wN-Hs9">
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="119.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="6Mr-6X-Ji3">
+                                                    <rect key="frame" x="13" y="13" width="317" height="93.5"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Teacher Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qkz-T6-bsX">
+                                                            <rect key="frame" x="0.0" y="0.0" width="115" height="70.5"/>
+                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Capable Courses" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IrE-m9-kok">
+                                                            <rect key="frame" x="0.0" y="75.5" width="117" height="18"/>
+                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottomMargin" secondItem="6Mr-6X-Ji3" secondAttribute="bottom" constant="5" id="2kY-HO-UUp"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="6Mr-6X-Ji3" secondAttribute="trailing" constant="5" id="ceR-Yi-dYM"/>
+                                                <constraint firstItem="6Mr-6X-Ji3" firstAttribute="leading" secondItem="QVg-wN-Hs9" secondAttribute="leadingMargin" constant="5" id="eeR-dY-pfa"/>
+                                                <constraint firstItem="6Mr-6X-Ji3" firstAttribute="top" secondItem="QVg-wN-Hs9" secondAttribute="topMargin" constant="5" id="wZq-Go-bGz"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="capableCoursesLabel" destination="IrE-m9-kok" id="STa-G8-qq6"/>
+                                            <outlet property="nameLabel" destination="qkz-T6-bsX" id="SSk-Ox-zMb"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="8rJ-Kc-sve" id="gdA-dT-8fQ"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="NDk-cv-Gan" firstAttribute="top" secondItem="zEq-FU-wV5" secondAttribute="bottom" constant="8" symbolic="YES" id="Day-4N-Vmt"/>
-                            <constraint firstItem="NDk-cv-Gan" firstAttribute="centerX" secondItem="zEq-FU-wV5" secondAttribute="centerX" id="JgO-Fn-dHn"/>
-                            <constraint firstAttribute="centerX" secondItem="zEq-FU-wV5" secondAttribute="centerX" id="qqM-NS-xev"/>
-                            <constraint firstAttribute="centerY" secondItem="zEq-FU-wV5" secondAttribute="centerY" id="qzY-Ky-pLD"/>
+                            <constraint firstItem="Djb-ko-YwX" firstAttribute="top" secondItem="F5r-Sy-unp" secondAttribute="bottom" id="0S4-we-C9K"/>
+                            <constraint firstItem="F5r-Sy-unp" firstAttribute="top" secondItem="L7p-HK-0SC" secondAttribute="bottom" id="P1h-0s-9vE"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="F5r-Sy-unp" secondAttribute="trailing" id="ltP-sq-Mrx"/>
+                            <constraint firstItem="F5r-Sy-unp" firstAttribute="leading" secondItem="QS5-Rx-YEW" secondAttribute="leadingMargin" id="nj0-Rg-J1o"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="教师" image="second" id="cPa-gy-q4n"/>
+                    <navigationItem key="navigationItem" title="老师们" id="Ljd-eW-j1c">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="8ks-xH-bQG">
+                            <connections>
+                                <segue destination="kqm-41-bE5" kind="show" id="WBD-Uh-iae"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="teachersView" destination="F5r-Sy-unp" id="HKg-cx-z6h"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="750" y="360"/>
+            <point key="canvasLocation" x="1628" y="358.4707646176912"/>
+        </scene>
+        <!--添加老师-->
+        <scene sceneID="UWN-AK-vRw">
+            <objects>
+                <tableViewController title="添加老师" id="kqm-41-bE5" customClass="TeacherEditorController" customModule="SchoolCourseTable" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="Q4x-aV-0zQ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <sections>
+                            <tableViewSection headerTitle="教师姓名" id="xef-ra-ghu">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="67" id="73S-zj-M2o">
+                                        <rect key="frame" x="0.0" y="55.5" width="375" height="67"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="73S-zj-M2o" id="5zB-2v-y2l">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="66.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="老师名字" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GNl-zC-zeu">
+                                                    <rect key="frame" x="139" y="18" width="97" height="30"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <nil key="textColor"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection headerTitle="课程科目" id="z8Q-7P-Qcq">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="200" id="I0M-O2-eEB">
+                                        <rect key="frame" x="0.0" y="178.5" width="375" height="200"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="I0M-O2-eEB" id="D0j-B6-YeW">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="199.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="NrM-Dz-2x7">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="lal-93-hUw">
+                                                        <size key="itemSize" width="77" height="71.5"/>
+                                                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                    </collectionViewFlowLayout>
+                                                    <cells>
+                                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CourseSubjectCell" id="Nav-uH-894" customClass="CourseSubjectCell" customModule="SchoolCourseTable" customModuleProvider="target">
+                                                            <rect key="frame" x="0.0" y="0.0" width="77" height="71.5"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                                                <rect key="frame" x="0.0" y="0.0" width="77" height="71.5"/>
+                                                                <autoresizingMask key="autoresizingMask"/>
+                                                                <subviews>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="语文" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E0I-QP-vdy">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="77" height="71.5"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                        <nil key="textColor"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                        <userDefinedRuntimeAttributes>
+                                                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                                <integer key="value" value="5"/>
+                                                                            </userDefinedRuntimeAttribute>
+                                                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                                                                <integer key="value" value="2"/>
+                                                                            </userDefinedRuntimeAttribute>
+                                                                            <userDefinedRuntimeAttribute type="color" keyPath="keyPath">
+                                                                                <color key="value" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                            </userDefinedRuntimeAttribute>
+                                                                        </userDefinedRuntimeAttributes>
+                                                                    </label>
+                                                                </subviews>
+                                                            </view>
+                                                            <constraints>
+                                                                <constraint firstAttribute="bottomMargin" secondItem="E0I-QP-vdy" secondAttribute="bottom" id="7R6-cJ-HAi"/>
+                                                                <constraint firstItem="E0I-QP-vdy" firstAttribute="top" secondItem="Nav-uH-894" secondAttribute="topMargin" id="K5a-tR-Rss"/>
+                                                                <constraint firstItem="E0I-QP-vdy" firstAttribute="leading" secondItem="Nav-uH-894" secondAttribute="leadingMargin" id="rJW-7B-96B"/>
+                                                                <constraint firstAttribute="trailingMargin" secondItem="E0I-QP-vdy" secondAttribute="trailing" id="uJk-f6-Kkt"/>
+                                                            </constraints>
+                                                            <connections>
+                                                                <outlet property="subjectLabel" destination="E0I-QP-vdy" id="FlA-qI-nDi"/>
+                                                            </connections>
+                                                        </collectionViewCell>
+                                                    </cells>
+                                                    <connections>
+                                                        <outlet property="dataSource" destination="kqm-41-bE5" id="4Z6-ql-YX3"/>
+                                                        <outlet property="delegate" destination="kqm-41-bE5" id="1t3-G2-iLZ"/>
+                                                    </connections>
+                                                </collectionView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="NrM-Dz-2x7" firstAttribute="leading" secondItem="D0j-B6-YeW" secondAttribute="leading" id="3xW-Of-2lT"/>
+                                                <constraint firstItem="NrM-Dz-2x7" firstAttribute="top" secondItem="D0j-B6-YeW" secondAttribute="top" id="dON-0Z-gzH"/>
+                                                <constraint firstAttribute="trailing" secondItem="NrM-Dz-2x7" secondAttribute="trailing" id="fhp-mY-BYh"/>
+                                                <constraint firstAttribute="bottom" secondItem="NrM-Dz-2x7" secondAttribute="bottom" id="iTf-JC-GdX"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="kqm-41-bE5" id="lp6-d0-pqW"/>
+                            <outlet property="delegate" destination="kqm-41-bE5" id="GUu-l1-Q6h"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="Ghi-Mt-xzs">
+                        <barButtonItem key="rightBarButtonItem" title="保存" id="npm-Eg-4Rc">
+                            <connections>
+                                <segue destination="a3j-9E-mZJ" kind="unwind" unwindAction="saveTeacherWithSender:" id="O61-cj-CDi"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="subjectSelectionView" destination="NrM-Dz-2x7" id="Vng-gA-icq"/>
+                        <outlet property="teacherNameTextField" destination="GNl-zC-zeu" id="H7o-3V-srH"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TJD-8s-f5D" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="a3j-9E-mZJ" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="2477.5999999999999" y="357.57121439280365"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
@@ -124,13 +309,49 @@
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBar>
                     <connections>
-                        <segue destination="9pv-A4-QxB" kind="relationship" relationship="viewControllers" id="u7Y-xg-7CH"/>
-                        <segue destination="8rJ-Kc-sve" kind="relationship" relationship="viewControllers" id="lzU-1b-eKA"/>
+                        <segue destination="8BW-pq-KQE" kind="relationship" relationship="viewControllers" id="lzU-1b-eKA"/>
+                        <segue destination="xta-HB-6DD" kind="relationship" relationship="viewControllers" id="u7Y-xg-7CH"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="0.0" y="0.0"/>
+        </scene>
+        <!--课表-->
+        <scene sceneID="CNZ-5w-WWV">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="xta-HB-6DD" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="课表" image="first" id="acW-dT-cKf"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="wMO-9s-r5Y">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="9pv-A4-QxB" kind="relationship" relationship="rootViewController" id="B1k-Zz-ton"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NbV-ut-taU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="748.79999999999995" y="-321.13943028485761"/>
+        </scene>
+        <!--教师-->
+        <scene sceneID="kth-he-UVi">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="8BW-pq-KQE" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="教师" image="second" id="cPa-gy-q4n"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="u1f-wn-PvZ">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="8rJ-Kc-sve" kind="relationship" relationship="rootViewController" id="Fxk-XL-kdy"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vec-Ib-N6U" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="748.79999999999995" y="359.82008995502252"/>
         </scene>
     </scenes>
     <resources>
