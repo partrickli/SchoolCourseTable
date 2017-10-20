@@ -31,11 +31,9 @@ class CourseTableViewController: UIViewController {
         
         courseTableCollectionView.register(CourseTableHeaderView.self, forSupplementaryViewOfKind: CourseTableLayout.Element.TableHeader.kind, withReuseIdentifier: "CourseTableHeader")
         
-        // drag interaction
-//        courseTableCollectionView.dragInteractionEnabled = true
-//        courseTableCollectionView.dragDelegate = self
-        
-//        courseTableCollectionView.dropDelegate = self
+        // Course Table Collection View Drop interaction
+        courseTableCollectionView.dragInteractionEnabled = true
+        courseTableCollectionView.dropDelegate = self
 
         // Course Selection Collection View Drag Interaction
         
@@ -77,29 +75,30 @@ extension CourseTableViewController: UICollectionViewDragDelegate {
 //
 //}
 
-//extension CourseTableViewController: UICollectionViewDropDelegate {
-//
-//    func collectionView(_ collectionView: UICollectionView, performDropWith coordinator: UICollectionViewDropCoordinator) {
-//
-//        let destinationIndexPath = coordinator.destinationIndexPath ?? IndexPath(item: 0, section: 0)
-//
-//        print("drop enabled")
-//        coordinator.session.loadObjects(ofClass: NSString.self) { nsstrings in
-//            let string = String(describing: nsstrings.first!)
-//            self.courses[destinationIndexPath.item].teacher.name = string
-//            collectionView.reloadItems(at: [destinationIndexPath])
-//        }
-//
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, canHandle session: UIDropSession) -> Bool {
-//        return true
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UICollectionViewDropProposal {
-//        return UICollectionViewDropProposal(operation: .move, intent: .insertIntoDestinationIndexPath)
-//    }
-//}
+extension CourseTableViewController: UICollectionViewDropDelegate {
+
+    func collectionView(_ collectionView: UICollectionView, performDropWith coordinator: UICollectionViewDropCoordinator) {
+
+        let destinationIndexPath = coordinator.destinationIndexPath ?? IndexPath(item: 0, section: 0)
+
+        print("drop enabled")
+        coordinator.session.loadObjects(ofClass: NSString.self) { nsstrings in
+            let string = String(describing: nsstrings.first!)
+            let teacher = Teacher(name: string, capableSubjects: [])
+            self.stateController.courses[destinationIndexPath.item].teacher = teacher
+            collectionView.reloadItems(at: [destinationIndexPath])
+        }
+
+    }
+
+    func collectionView(_ collectionView: UICollectionView, canHandle session: UIDropSession) -> Bool {
+        return true
+    }
+
+    func collectionView(_ collectionView: UICollectionView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UICollectionViewDropProposal {
+        return UICollectionViewDropProposal(operation: .move, intent: .insertIntoDestinationIndexPath)
+    }
+}
 
 extension CourseTableViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -126,7 +125,6 @@ extension CourseTableCollectionViewDataSource: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SchoolCourseCell", for: indexPath) as! SchoolCourseCell
         cell.courseLabel.text = stateController.courses[indexPath.item].teacher.name
-        cell.backgroundColor = .lightGray
         return cell
     }
     

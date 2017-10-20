@@ -47,7 +47,7 @@ struct Teacher: Codable {
 }
 
 struct Course {
-    let teacher: Teacher
+    var teacher: Teacher
     let subject: Subject
     
 }

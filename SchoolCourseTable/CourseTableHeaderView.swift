@@ -13,7 +13,6 @@ class CourseTableHeaderView: UICollectionReusableView {
     let label: UILabel = {
         let l = UILabel()
         l.text = "年级"
-        l.backgroundColor = .lightGray
         l.textColor = .white
         l.font = UIFont.preferredFont(forTextStyle: .headline)
         l.translatesAutoresizingMaskIntoConstraints = false
@@ -22,7 +21,6 @@ class CourseTableHeaderView: UICollectionReusableView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .lightGray
         
         addSubview(label)
         label.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
