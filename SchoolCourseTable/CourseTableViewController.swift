@@ -10,12 +10,24 @@ import UIKit
 
 class CourseTableViewController: UIViewController {
     
-    @IBOutlet weak var courseTableCollectionView: UICollectionView!
+    var stateController: StateController!
+    var courseTableCollectionViewDataSource: CourseTableCollectionViewDataSource!
+    var courseSelectionCollectionViewDataSource: CourseSelectionCollectionViewDataSource!
     
-    var courses = Array(repeating: Course(), count: 30)
+    @IBOutlet weak var courseTableCollectionView: UICollectionView!
+    @IBOutlet weak var courseSelectionCollectionView: UICollectionView!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        stateController = StateController()
+        
+        courseTableCollectionViewDataSource = CourseTableCollectionViewDataSource(stateController: stateController)
+        courseTableCollectionView.dataSource = courseTableCollectionViewDataSource
+        
+        courseSelectionCollectionViewDataSource = CourseSelectionCollectionViewDataSource(stateController: stateController)
+        courseSelectionCollectionView.dataSource = courseSelectionCollectionViewDataSource
         
         courseTableCollectionView.register(CourseTableHeaderView.self, forSupplementaryViewOfKind: CourseTableLayout.Element.TableHeader.kind, withReuseIdentifier: "CourseTableHeader")
         
@@ -27,27 +39,15 @@ class CourseTableViewController: UIViewController {
 
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        stateController.reloadTeachers()
+        courseSelectionCollectionView.reloadData()
+    }
+    
 }
 
-extension CourseTableViewController: UICollectionViewDataSource {
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return courses.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SchoolCourseCell", for: indexPath) as! SchoolCourseCell
-        cell.courseLabel.text = courses[indexPath.item].teacher.name
-        cell.backgroundColor = .lightGray
-        return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let view = collectionView.dequeueReusableSupplementaryView(ofKind: CourseTableLayout.Element.TableHeader.kind, withReuseIdentifier: "CourseTableHeader", for: indexPath)
-        return view
-    }
-
-}
 
 // drag and drop
 
@@ -86,10 +86,59 @@ extension CourseTableViewController: UICollectionViewDataSource {
 //    }
 //}
 
+class CourseTableCollectionViewDataSource: NSObject {
+    
+    let stateController: StateController
+    
+    init(stateController: StateController) {
+        self.stateController = stateController
+    }
+    
+}
 
+extension CourseTableCollectionViewDataSource: UICollectionViewDataSource {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return stateController.courses.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SchoolCourseCell", for: indexPath) as! SchoolCourseCell
+        cell.courseLabel.text = stateController.courses[indexPath.item].teacher.name
+        cell.backgroundColor = .lightGray
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let view = collectionView.dequeueReusableSupplementaryView(ofKind: CourseTableLayout.Element.TableHeader.kind, withReuseIdentifier: "CourseTableHeader", for: indexPath)
+        return view
+    }
+    
+}
 
+class CourseSelectionCollectionViewDataSource: NSObject {
+    
+    let stateController: StateController
+    
+    init(stateController: StateController) {
+        self.stateController = stateController
+    }
+    
+}
 
-
+extension CourseSelectionCollectionViewDataSource: UICollectionViewDataSource {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return stateController.teachers.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CourseSelectionCell", for: indexPath) as! CourseSelectionCell
+        cell.teacherNameLabel.text = stateController.teachers[indexPath.item].name
+        return cell
+    }
+    
+}
 
 
 

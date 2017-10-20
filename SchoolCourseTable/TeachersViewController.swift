@@ -10,36 +10,14 @@ import UIKit
 
 class TeachersViewController: UIViewController {
     
-    private let documentDirectoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-    private var logsURL: URL {
-        return documentDirectoryURL
-            .appendingPathComponent("Logs")
-            .appendingPathExtension("plist")
-    }
-
+    var stateController: StateController!
     
     @IBOutlet weak var teachersView: UITableView!
-    
-    var teachers: [Teacher] = [] {
-        didSet {
-            let encoder = PropertyListEncoder()
-            do {
-                let data = try encoder.encode(teachers)
-                try data.write(to: logsURL)
-            } catch  {
-                print(error)
-            }
-        }
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
-        let data = try! Data(contentsOf: logsURL)
-        let decoder = PropertyListDecoder()
-        let decoded = try! decoder.decode([Teacher].self, from: data)
-        teachers = decoded
+        stateController = StateController()
     }
     
     @IBAction func saveTeacher(sender: UIStoryboardSegue) {
@@ -47,7 +25,7 @@ class TeachersViewController: UIViewController {
             return
         }
         let newTeacher = sourceViewController.teacher
-        teachers.append(newTeacher)
+        stateController.teachers.append(newTeacher)
         teachersView.reloadData()
     }
 
@@ -56,20 +34,20 @@ class TeachersViewController: UIViewController {
 extension TeachersViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return teachers.count
+        return stateController.teachers.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TeacherCell", for: indexPath) as! TeacherCell
-        cell.nameLabel.text = teachers[indexPath.item].name
-        cell.capableCoursesLabel.text = teachers[indexPath.item].capableSubjects.map { $0.rawValue }.joined(separator: " | ")
+        cell.nameLabel.text = stateController.teachers[indexPath.item].name
+        cell.capableCoursesLabel.text = stateController.teachers[indexPath.item].capableSubjects.map { $0.rawValue }.joined(separator: " | ")
         return cell
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         switch editingStyle {
         case .delete:
-            teachers.remove(at: indexPath.item)
+            stateController.teachers.remove(at: indexPath.item)
             tableView.reloadData()
         default:
             return
