@@ -37,6 +37,11 @@ class CourseTableViewController: UIViewController {
         
 //        courseTableCollectionView.dropDelegate = self
 
+        // Course Selection Collection View Drag Interaction
+        
+        courseSelectionCollectionView.dragInteractionEnabled = true
+        courseSelectionCollectionView.dragDelegate = self
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -48,6 +53,16 @@ class CourseTableViewController: UIViewController {
     
 }
 
+extension CourseTableViewController: UICollectionViewDragDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+        let teacherString = stateController.teachers[indexPath.item].name
+        let item = NSItemProvider(object: NSString(string: teacherString))
+        let dragItem = UIDragItem(itemProvider: item)
+        return [dragItem]
+    }
+    
+}
 
 // drag and drop
 
@@ -85,6 +100,12 @@ class CourseTableViewController: UIViewController {
 //        return UICollectionViewDropProposal(operation: .move, intent: .insertIntoDestinationIndexPath)
 //    }
 //}
+
+extension CourseTableViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 60, height: 60)
+    }
+}
 
 class CourseTableCollectionViewDataSource: NSObject {
     
@@ -137,6 +158,9 @@ extension CourseSelectionCollectionViewDataSource: UICollectionViewDataSource {
         cell.teacherNameLabel.text = stateController.teachers[indexPath.item].name
         return cell
     }
+    
+    
+    
     
 }
 
