@@ -10,5 +10,6 @@ import UIKit
 
 class CourseSelectionCell: UICollectionViewCell {
     
+    @IBOutlet weak var subjectLabel: UILabel!
     @IBOutlet weak var teacherNameLabel: UILabel!
 }

@@ -46,7 +46,9 @@ struct Teacher: Codable {
     let capableSubjects: [Subject]
 }
 
-struct Course {
+// Course
+
+struct Course: Codable {
     var teacher: Teacher
     let subject: Subject
     
@@ -58,6 +60,14 @@ extension Course {
         self = Course(teacher: teacher, subject: .blank)
     }
 }
+
+extension Course: CustomStringConvertible {
+    var description: String {
+        return "\(subject.rawValue): \(teacher.name)"
+    }
+}
+
+//
 
 struct GradeClass {
     let grade: Int
@@ -91,3 +101,70 @@ extension ScheduleTime: Hashable {
     
     
 }
+
+// Wrapper Class of Course for NSItemProvider
+
+final class CourseItemProvider: NSObject {
+    let course: Course
+    
+    init(_ course: Course) {
+        self.course = course
+    }
+    
+    var value: Course {
+        return course
+    }
+}
+
+extension CourseItemProvider: NSItemProviderReading {
+    static var readableTypeIdentifiersForItemProvider: [String] {
+        return ["com.partrick.course"]
+    }
+    
+    static func object(withItemProviderData data: Data, typeIdentifier: String) throws -> CourseItemProvider {
+        let decoder = JSONDecoder()
+        if let course = try? decoder.decode(Course.self, from: data) {
+            return CourseItemProvider(course)
+        }
+        return CourseItemProvider(Course(teacher: Teacher(name: "", capableSubjects: []), subject: .blank))
+    }
+    
+    
+}
+
+extension CourseItemProvider: NSItemProviderWriting {
+    static var writableTypeIdentifiersForItemProvider: [String] {
+        return ["com.partrick.course"]
+
+    }
+    
+    func loadData(withTypeIdentifier typeIdentifier: String, forItemProviderCompletionHandler completionHandler: @escaping (Data?, Error?) -> Void) -> Progress? {
+        let encoder = JSONEncoder()
+        let data = try? encoder.encode(course)
+        completionHandler(data, nil)
+        return nil
+    }
+    
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

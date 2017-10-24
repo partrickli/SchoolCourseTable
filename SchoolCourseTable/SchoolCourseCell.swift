@@ -19,6 +19,6 @@ class SchoolCourseCell: UICollectionViewCell {
         layer.borderWidth = 1
     }
     
-    @IBOutlet weak var courseLabel: UILabel!
-
+    @IBOutlet weak var subjectLabel: UILabel!
+    @IBOutlet weak var teacherNameLabel: UILabel!
 }

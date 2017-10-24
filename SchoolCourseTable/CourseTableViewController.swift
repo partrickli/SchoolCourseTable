@@ -54,8 +54,9 @@ class CourseTableViewController: UIViewController {
 extension CourseTableViewController: UICollectionViewDragDelegate {
     
     func collectionView(_ collectionView: UICollectionView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
-        let teacherString = stateController.teachers[indexPath.item].name
-        let item = NSItemProvider(object: NSString(string: teacherString))
+        let course = stateController.availableCourses[indexPath.item]
+        let courseObject = CourseItemProvider(course)
+        let item = NSItemProvider(object: courseObject)
         let dragItem = UIDragItem(itemProvider: item)
         return [dragItem]
     }
@@ -78,17 +79,19 @@ extension CourseTableViewController: UICollectionViewDragDelegate {
 extension CourseTableViewController: UICollectionViewDropDelegate {
 
     func collectionView(_ collectionView: UICollectionView, performDropWith coordinator: UICollectionViewDropCoordinator) {
-
+        
         let destinationIndexPath = coordinator.destinationIndexPath ?? IndexPath(item: 0, section: 0)
-
-        print("drop enabled")
-        coordinator.session.loadObjects(ofClass: NSString.self) { nsstrings in
-            let string = String(describing: nsstrings.first!)
-            let teacher = Teacher(name: string, capableSubjects: [])
-            self.stateController.courses[destinationIndexPath.item].teacher = teacher
-            collectionView.reloadItems(at: [destinationIndexPath])
+        
+        if coordinator.session.canLoadObjects(ofClass: CourseItemProvider.self) {
+            coordinator.session.loadObjects(ofClass: CourseItemProvider.self) { courseItemProviders in
+                if let courseItemProvider = courseItemProviders.first as? CourseItemProvider {
+                    self.stateController.courses[destinationIndexPath.item] = courseItemProvider.value
+                    collectionView.reloadItems(at: [destinationIndexPath])
+                }
+            }
+            
         }
-
+        
     }
 
     func collectionView(_ collectionView: UICollectionView, canHandle session: UIDropSession) -> Bool {
@@ -102,7 +105,7 @@ extension CourseTableViewController: UICollectionViewDropDelegate {
 
 extension CourseTableViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 60, height: 60)
+        return CGSize(width: 80, height: 80)
     }
 }
 
@@ -124,7 +127,8 @@ extension CourseTableCollectionViewDataSource: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SchoolCourseCell", for: indexPath) as! SchoolCourseCell
-        cell.courseLabel.text = stateController.courses[indexPath.item].teacher.name
+        cell.subjectLabel.text = stateController.courses[indexPath.item].subject.rawValue
+        cell.teacherNameLabel.text = stateController.courses[indexPath.item].teacher.name
         return cell
     }
     
@@ -138,7 +142,7 @@ extension CourseTableCollectionViewDataSource: UICollectionViewDataSource {
 class CourseSelectionCollectionViewDataSource: NSObject {
     
     let stateController: StateController
-    
+        
     init(stateController: StateController) {
         self.stateController = stateController
     }
@@ -148,17 +152,15 @@ class CourseSelectionCollectionViewDataSource: NSObject {
 extension CourseSelectionCollectionViewDataSource: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return stateController.teachers.count
+        return stateController.availableCourses.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CourseSelectionCell", for: indexPath) as! CourseSelectionCell
-        cell.teacherNameLabel.text = stateController.teachers[indexPath.item].name
+        cell.subjectLabel.text = stateController.availableCourses[indexPath.item].subject.rawValue
+        cell.teacherNameLabel.text = stateController.availableCourses[indexPath.item].teacher.name
         return cell
     }
-    
-    
-    
     
 }
 

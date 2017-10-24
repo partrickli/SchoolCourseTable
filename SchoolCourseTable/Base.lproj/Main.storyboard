@@ -22,7 +22,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="wYT-mB-8yr">
-                                <rect key="frame" x="0.0" y="64" width="375" height="486"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="466"/>
                                 <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewLayout key="collectionViewLayout" id="BOJ-JT-sEQ" customClass="CourseTableLayout" customModule="SchoolCourseTable" customModuleProvider="target"/>
                                 <cells>
@@ -33,32 +33,44 @@
                                             <rect key="frame" x="0.0" y="0.0" width="123" height="102"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="语文" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jsl-y7-IBc">
-                                                    <rect key="frame" x="44" y="40" width="35" height="20.5"/>
-                                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                                    <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="gEM-bM-jSV">
+                                                    <rect key="frame" x="49.5" y="43" width="82" height="77"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="语文" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jsl-y7-IBc">
+                                                            <rect key="frame" x="0.0" y="0.0" width="35" height="20.5"/>
+                                                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="老师" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HON-4W-5GT">
+                                                            <rect key="frame" x="2" y="23.5" width="31" height="18"/>
+                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                                            <color key="textColor" red="0.75406885150000003" green="0.75408679249999999" blue="0.75407713649999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
                                             </subviews>
                                         </view>
                                         <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstItem="Jsl-y7-IBc" firstAttribute="centerX" secondItem="Teo-hc-fhb" secondAttribute="centerX" id="2ZL-cC-7im"/>
-                                            <constraint firstItem="Jsl-y7-IBc" firstAttribute="centerY" secondItem="Teo-hc-fhb" secondAttribute="centerY" id="SjU-56-AVG"/>
+                                            <constraint firstItem="gEM-bM-jSV" firstAttribute="centerX" secondItem="Teo-hc-fhb" secondAttribute="centerX" id="BQm-AQ-U5u"/>
+                                            <constraint firstItem="gEM-bM-jSV" firstAttribute="centerY" secondItem="Teo-hc-fhb" secondAttribute="centerY" id="PRb-eb-h5n"/>
                                         </constraints>
                                         <size key="customSize" width="123" height="102"/>
                                         <connections>
-                                            <outlet property="courseLabel" destination="Jsl-y7-IBc" id="KJB-kn-iYX"/>
+                                            <outlet property="subjectLabel" destination="Jsl-y7-IBc" id="oTV-qQ-xax"/>
+                                            <outlet property="teacherNameLabel" destination="HON-4W-5GT" id="934-7X-gvF"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="l2d-Na-BfI">
-                                <rect key="frame" x="16" y="558" width="343" height="60"/>
+                                <rect key="frame" x="16" y="538" width="343" height="80"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="qqY-gz-Lr0"/>
+                                    <constraint firstAttribute="height" constant="80" id="qqY-gz-Lr0"/>
                                 </constraints>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="FGE-x7-wta">
                                     <size key="itemSize" width="68" height="62"/>
@@ -68,29 +80,40 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CourseSelectionCell" id="MW2-73-Fiy" customClass="CourseSelectionCell" customModule="SchoolCourseTable" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="-1" width="68" height="62"/>
+                                        <rect key="frame" x="0.0" y="19" width="68" height="62"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                             <rect key="frame" x="0.0" y="0.0" width="68" height="62"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eAD-Zp-Vpi">
-                                                    <rect key="frame" x="16" y="23.5" width="36" height="15.5"/>
-                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
-                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                    <color key="shadowColor" red="0.83741801979999997" green="0.83743780850000005" blue="0.83742713930000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <size key="shadowOffset" width="1" height="1"/>
-                                                </label>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="4d0-0x-N7B">
+                                                    <rect key="frame" x="13" y="8" width="82" height="71"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="科目" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M55-fk-2wx">
+                                                            <rect key="frame" x="0.0" y="0.0" width="61.5" height="20.5"/>
+                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                            <color key="textColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="教师名字" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eAD-Zp-Vpi">
+                                                            <rect key="frame" x="0.0" y="20.5" width="61.5" height="18"/>
+                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                            <color key="shadowColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <size key="shadowOffset" width="0.0" height="0.0"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
                                             </subviews>
                                         </view>
-                                        <color key="backgroundColor" red="1" green="0.83234566450000003" blue="0.47320586440000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="0.57414853570000002" green="0.57416242360000003" blue="0.57415497299999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="trailingMargin" secondItem="eAD-Zp-Vpi" secondAttribute="trailing" id="A5I-K6-gca"/>
-                                            <constraint firstItem="eAD-Zp-Vpi" firstAttribute="leading" secondItem="MW2-73-Fiy" secondAttribute="leadingMargin" id="ILE-mQ-3vn"/>
-                                            <constraint firstItem="eAD-Zp-Vpi" firstAttribute="centerY" secondItem="MW2-73-Fiy" secondAttribute="centerY" id="Ocq-Le-cHb"/>
+                                            <constraint firstItem="4d0-0x-N7B" firstAttribute="centerX" secondItem="MW2-73-Fiy" secondAttribute="centerX" id="UAo-mb-Lbt"/>
+                                            <constraint firstItem="4d0-0x-N7B" firstAttribute="centerY" secondItem="MW2-73-Fiy" secondAttribute="centerY" id="vRj-LN-xg0"/>
                                         </constraints>
                                         <connections>
+                                            <outlet property="subjectLabel" destination="M55-fk-2wx" id="DIY-aw-PG6"/>
                                             <outlet property="teacherNameLabel" destination="eAD-Zp-Vpi" id="XaN-2I-iKw"/>
                                         </connections>
                                     </collectionViewCell>

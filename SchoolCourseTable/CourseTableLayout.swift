@@ -58,7 +58,7 @@ class CourseTableLayout: UICollectionViewLayout {
             
             let indexPath = IndexPath(item: item, section: 0)
             let currentColumn = item % numberOfColumns
-            let imageHeight: CGFloat = columnWidth * 0.618
+            let imageHeight: CGFloat = columnWidth * 0.8
             
             xOffset = CGFloat(currentColumn) * columnWidth
             

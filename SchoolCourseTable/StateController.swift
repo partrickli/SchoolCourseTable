@@ -29,6 +29,16 @@ class StateController {
         }
     }
     
+    var availableCourses: [Course] {
+        let courses = teachers.flatMap { teacher in
+            return teacher.capableSubjects.map { subject in
+                Course(teacher: teacher,subject: subject)
+            }
+        }
+        
+        return courses.sorted { $0.subject.rawValue > $1.subject.rawValue }
+    }
+    
     var courses = Array(repeating: Course(), count: 30)
 
     
