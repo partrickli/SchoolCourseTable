@@ -54,26 +54,36 @@ class CourseTableLayout: UICollectionViewLayout {
         var xOffset: CGFloat = 0
         var yOffset = Array<CGFloat>(repeating: headerHeight, count: numberOfColumns)
         
-        for item in 0 ..< collectionView.numberOfItems(inSection: 0) {
-            
-            let indexPath = IndexPath(item: item, section: 0)
-            let currentColumn = item % numberOfColumns
-            let imageHeight: CGFloat = columnWidth * 0.8
-            
-            xOffset = CGFloat(currentColumn) * columnWidth
-            
-            let attributes = UICollectionViewLayoutAttributes(forCellWith: indexPath)
-            let cellFrame = CGRect(x: xOffset, y: yOffset[currentColumn], width: columnWidth, height: imageHeight)
-            attributes.frame = cellFrame.insetBy(dx: 1, dy: 1)
-            cache.append(attributes)
-            
-            yOffset[currentColumn] += imageHeight
-            
-            contentHeight = yOffset.reduce(0) { currentMax, offset in
-                return max(currentMax, offset)
+        for section in 0 ..< collectionView.numberOfSections {
+            for item in 0 ..< collectionView.numberOfItems(inSection: section) {
+                let indexPath = IndexPath(item: item, section: section)
+                let currentColumn = item % numberOfColumns
+                let imageHeight: CGFloat = columnWidth * 0.8
+                
+                xOffset = CGFloat(currentColumn) * columnWidth
+                
+                let attributes = UICollectionViewLayoutAttributes(forCellWith: indexPath)
+                let cellFrame = CGRect(x: xOffset, y: yOffset[currentColumn], width: columnWidth, height: imageHeight)
+                attributes.frame = cellFrame.insetBy(dx: 1, dy: 1)
+                cache.append(attributes)
+                
+                yOffset[currentColumn] += imageHeight
+                
+                contentHeight = yOffset.reduce(0) { currentMax, offset in
+                    return max(currentMax, offset)
+                }
+
+                
+                print(indexPath)
+                print(attributes.frame.origin)
+                print()
             }
             
+            for i in 0 ..< yOffset.count {
+                yOffset[i] += headerHeight
+            }
         }
+        
     }
     
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
@@ -83,7 +93,7 @@ class CourseTableLayout: UICollectionViewLayout {
     }
     
     override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
-        return cache[indexPath.item]
+        return cache[indexPath.section * (collectionView?.numberOfSections)! + indexPath.item]
     }
     
     override func layoutAttributesForSupplementaryView(ofKind elementKind: String, at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {

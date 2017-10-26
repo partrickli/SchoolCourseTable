@@ -17,17 +17,28 @@ class StateController {
             .appendingPathExtension("plist")
     }
     
+    static var scheduleURL: URL {
+        return documentDirectoryURL.appendingPathComponent("schedule").appendingPathExtension("plist")
+    }
+    
+    let classCountPerGrade = 5
+    let coursePerDay = 7
+    
+    var totalCoursePerDay: Int {
+        return classCountPerGrade * coursePerDay
+    }
+    
     var teachers: [Teacher] {
         didSet {
-            let encoder = PropertyListEncoder()
-            do {
-                let data = try encoder.encode(teachers)
-                try data.write(to: StateController.logsURL)
-            } catch  {
-                print(error)
-            }
+            teachers.savePlist(to: StateController.logsURL)
         }
     }
+    
+//    var schedules: [Schedule] {
+//        didSet {
+//            schedules.savePlist(to: StateController.scheduleURL)
+//        }
+//    }
     
     var availableCourses: [Course] {
         let courses = teachers.flatMap { teacher in
@@ -39,24 +50,37 @@ class StateController {
         return courses.sorted { $0.subject.rawValue > $1.subject.rawValue }
     }
     
-    var courses = Array(repeating: Course(), count: 30)
-
+    var courses = Array(repeating: Course(), count: 35)
     
     init() {
-        teachers = StateController.loadTeachers()
+        teachers = StateController.reload(from: StateController.logsURL)
     }
     
-    class func loadTeachers() -> [Teacher] {
-        let data = try! Data(contentsOf: logsURL)
+    static func reload<T>(from url: URL) -> [T] {
+        let data = try! Data(contentsOf: url)
         let decoder = PropertyListDecoder()
-        let decoded = try! decoder.decode([Teacher].self, from: data)
-        return decoded
+        if let decoded = try? decoder.decode([T].self, from: data) {
+            return decoded
+        } else {
+            return []
+        }
     }
     
-    func reloadTeachers() {
-        let data = try! Data(contentsOf: StateController.logsURL)
-        let decoder = PropertyListDecoder()
-        let decoded = try! decoder.decode([Teacher].self, from: data)
-        self.teachers = decoded
+    func reloadData() {
+        self.teachers = StateController.reload(from: StateController.logsURL)
+    }
+    
+}
+
+
+extension Array {
+    func savePlist(to url: URL) {
+        let encoder = PropertyListEncoder()
+        do {
+            let data = try encoder.encode(self)
+            try data.write(to: url)
+        } catch  {
+            print(error)
+        }
     }
 }

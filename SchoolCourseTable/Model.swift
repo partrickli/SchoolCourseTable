@@ -18,6 +18,50 @@ enum Subject: String, Codable {
     case blank = ""
 }
 
+struct Teacher: Codable {
+    let name: String
+    let capableSubjects: [Subject]
+}
+
+// Course
+
+struct Course: Codable {
+    var teacher: Teacher
+    let subject: Subject
+    
+}
+
+struct GradeClass: Codable {
+    let grade: Int
+    let classInGrade: Int
+}
+
+struct ScheduleTime: Codable {
+    let day: Int
+    let order: Int
+}
+
+// Course Schedule
+
+struct Schedule: Codable {
+    let course: Course
+    let time: ScheduleTime
+    let gradeClass: GradeClass
+}
+
+// Wrapper Class of Course for NSItemProvider
+
+final class CourseItemProvider: NSObject {
+    let course: Course
+    
+    init(_ course: Course) {
+        self.course = course
+    }
+    
+    var value: Course {
+        return course
+    }
+}
 
 // all case and random case
 
@@ -41,18 +85,8 @@ extension Subject {
     
 }
 
-struct Teacher: Codable {
-    let name: String
-    let capableSubjects: [Subject]
-}
 
-// Course
 
-struct Course: Codable {
-    var teacher: Teacher
-    let subject: Subject
-    
-}
 
 extension Course {
     init() {
@@ -69,10 +103,6 @@ extension Course: CustomStringConvertible {
 
 //
 
-struct GradeClass {
-    let grade: Int
-    let classInGrade: Int
-}
 
 extension GradeClass: Hashable {
     var hashValue: Int {
@@ -85,10 +115,6 @@ extension GradeClass: Hashable {
     
 }
 
-struct ScheduleTime {
-    let day: Int
-    let order: Int
-}
 
 extension ScheduleTime: Hashable {
     var hashValue: Int {
@@ -102,19 +128,7 @@ extension ScheduleTime: Hashable {
     
 }
 
-// Wrapper Class of Course for NSItemProvider
 
-final class CourseItemProvider: NSObject {
-    let course: Course
-    
-    init(_ course: Course) {
-        self.course = course
-    }
-    
-    var value: Course {
-        return course
-    }
-}
 
 extension CourseItemProvider: NSItemProviderReading {
     static var readableTypeIdentifiersForItemProvider: [String] {

@@ -45,7 +45,7 @@ class CourseTableViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        stateController.reloadTeachers()
+        stateController.reloadData()
         courseSelectionCollectionView.reloadData()
     }
     
@@ -121,14 +121,18 @@ class CourseTableCollectionViewDataSource: NSObject {
 
 extension CourseTableCollectionViewDataSource: UICollectionViewDataSource {
     
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 5 // five workday per week
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return stateController.courses.count
+        return stateController.totalCoursePerDay
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SchoolCourseCell", for: indexPath) as! SchoolCourseCell
-        cell.subjectLabel.text = stateController.courses[indexPath.item].subject.rawValue
-        cell.teacherNameLabel.text = stateController.courses[indexPath.item].teacher.name
+        cell.subjectLabel.text = "没课"
+        cell.teacherNameLabel.text = "没人"
         return cell
     }
     
