@@ -25,7 +25,7 @@ class TeachersViewController: UIViewController {
             return
         }
         let newTeacher = sourceViewController.teacher
-        stateController.teachers.append(newTeacher)
+        stateController.teachers.append(newTeacher!)
         teachersView.reloadData()
     }
 
@@ -40,7 +40,9 @@ extension TeachersViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TeacherCell", for: indexPath) as! TeacherCell
         cell.nameLabel.text = stateController.teachers[indexPath.item].name
-        cell.capableCoursesLabel.text = stateController.teachers[indexPath.item].capableSubjects.map { $0.rawValue }.joined(separator: " | ")
+        cell.capableCoursesLabel.text = stateController.teachers[indexPath.item].subjectCount.map {
+            " \($0.key.rawValue):\($0.value) "
+        }.joined()
         return cell
     }
     

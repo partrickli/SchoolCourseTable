@@ -85,7 +85,7 @@ extension CourseTableViewController: UICollectionViewDropDelegate {
         if coordinator.session.canLoadObjects(ofClass: CourseItemProvider.self) {
             coordinator.session.loadObjects(ofClass: CourseItemProvider.self) { courseItemProviders in
                 if let courseItemProvider = courseItemProviders.first as? CourseItemProvider {
-                    self.stateController.courses[destinationIndexPath.item] = courseItemProvider.value
+                    self.courseTableCollectionViewDataSource.courses[destinationIndexPath.section].courses[destinationIndexPath.item] = courseItemProvider.value
                     collectionView.reloadItems(at: [destinationIndexPath])
                 }
             }
@@ -113,8 +113,29 @@ class CourseTableCollectionViewDataSource: NSObject {
     
     let stateController: StateController
     
+    let workDayPerWeek = ["星期一", "星期二", "星期三", "星期四", "星期五"]
+    
+    struct DayCourses {
+        let weekDay: String
+        var courses: [Course]
+    }
+    
+    var courses: [DayCourses] = []
+    
     init(stateController: StateController) {
         self.stateController = stateController
+        self.courses = workDayPerWeek.map { day in
+            let teacher = Teacher(name: "", subjectCount: [:])
+            let count = stateController.coursePerDay * stateController.classCountPerGrade
+            let courses = Array(repeating: Course(teacher: teacher, subject: .blank), count: count)
+            return DayCourses(weekDay: day, courses: courses)
+        }
+    }
+    
+    func convert(indexPath: IndexPath) -> (Int, Int) {
+        let order = indexPath.item / stateController.classCountPerGrade
+        let classIndex = indexPath.item % stateController.classCountPerGrade
+        return (order, classIndex)
     }
     
 }
@@ -131,13 +152,15 @@ extension CourseTableCollectionViewDataSource: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SchoolCourseCell", for: indexPath) as! SchoolCourseCell
-        cell.subjectLabel.text = "没课"
-        cell.teacherNameLabel.text = "没人"
+        let coursesOfDay = courses[indexPath.section].courses
+        cell.subjectLabel.text = coursesOfDay[indexPath.item].subject.rawValue
+        cell.teacherNameLabel.text = coursesOfDay[indexPath.item].teacher.name
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let view = collectionView.dequeueReusableSupplementaryView(ofKind: CourseTableLayout.Element.TableHeader.kind, withReuseIdentifier: "CourseTableHeader", for: indexPath)
+        let view = collectionView.dequeueReusableSupplementaryView(ofKind: CourseTableLayout.Element.TableHeader.kind, withReuseIdentifier: "CourseTableHeader", for: indexPath) as! CourseTableHeaderView
+        view.label.text = workDayPerWeek[indexPath.section]
         return view
     }
     

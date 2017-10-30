@@ -34,15 +34,22 @@ class StateController {
         }
     }
     
-//    var schedules: [Schedule] {
-//        didSet {
-//            schedules.savePlist(to: StateController.scheduleURL)
-//        }
-//    }
+    // schedule design to dictionanry for radom access convenience
+    var schedules: [GradeClass: [ScheduleTime: Course]] {
+        didSet {
+            let encoder = PropertyListEncoder()
+            do {
+                let data = try encoder.encode(schedules)
+                try data.write(to: StateController.scheduleURL)
+            } catch  {
+                print(error)
+            }
+        }
+    }
     
     var availableCourses: [Course] {
         let courses = teachers.flatMap { teacher in
-            return teacher.capableSubjects.map { subject in
+            return teacher.subjectCount.keys.map { subject in
                 Course(teacher: teacher,subject: subject)
             }
         }
@@ -54,6 +61,7 @@ class StateController {
     
     init() {
         teachers = StateController.reload(from: StateController.logsURL)
+        schedules = [:]
     }
     
     static func reload<T>(from url: URL) -> [T] {

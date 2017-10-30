@@ -20,7 +20,7 @@ enum Subject: String, Codable {
 
 struct Teacher: Codable {
     let name: String
-    let capableSubjects: [Subject]
+    let subjectCount: [Subject: Int]
 }
 
 // Course
@@ -43,11 +43,11 @@ struct ScheduleTime: Codable {
 
 // Course Schedule
 
-struct Schedule: Codable {
-    let course: Course
-    let time: ScheduleTime
-    let gradeClass: GradeClass
-}
+//struct Schedule: Codable {
+//    let course: Course
+//    let time: ScheduleTime
+//    let gradeClass: GradeClass
+//}
 
 // Wrapper Class of Course for NSItemProvider
 
@@ -85,12 +85,9 @@ extension Subject {
     
 }
 
-
-
-
 extension Course {
     init() {
-        let teacher = Teacher(name: "", capableSubjects: [])
+        let teacher = Teacher(name: "", subjectCount: [:])
         self = Course(teacher: teacher, subject: .blank)
     }
 }
@@ -100,9 +97,6 @@ extension Course: CustomStringConvertible {
         return "\(subject.rawValue): \(teacher.name)"
     }
 }
-
-//
-
 
 extension GradeClass: Hashable {
     var hashValue: Int {
@@ -115,20 +109,12 @@ extension GradeClass: Hashable {
     
 }
 
-
 extension ScheduleTime: Hashable {
     var hashValue: Int {
         return day * 1024 + order
     }
     
-    static func ==(lhs: ScheduleTime, rhs: ScheduleTime) -> Bool {
-        return lhs.day == rhs.day && lhs.order == rhs.order
-    }
-    
-    
 }
-
-
 
 extension CourseItemProvider: NSItemProviderReading {
     static var readableTypeIdentifiersForItemProvider: [String] {
@@ -140,7 +126,7 @@ extension CourseItemProvider: NSItemProviderReading {
         if let course = try? decoder.decode(Course.self, from: data) {
             return CourseItemProvider(course)
         }
-        return CourseItemProvider(Course(teacher: Teacher(name: "", capableSubjects: []), subject: .blank))
+        return CourseItemProvider(Course(teacher: Teacher(name: "", subjectCount: [:]), subject: .blank))
     }
     
     
@@ -162,6 +148,38 @@ extension CourseItemProvider: NSItemProviderWriting {
     
 }
 
+// Teacher Description
+
+extension Teacher: CustomStringConvertible {
+    
+    var description: String {
+        let subjects = subjectCount.reduce("") { result, subject in
+            return result + "#" + "\(subject.key.rawValue) - \(subject.value)"
+        }
+        return "\(name): \(subjects)"
+    }
+
+}
+
+// Equatable
+
+extension Course: Equatable {
+    static func ==(lhs: Course, rhs: Course) -> Bool {
+        return lhs.teacher.name == rhs.teacher.name && lhs.subject == rhs.subject
+    }
+}
+
+extension ScheduleTime: Equatable {
+    static func ==(lhs: ScheduleTime, rhs: ScheduleTime) -> Bool {
+        return lhs.day == rhs.day && lhs.order == rhs.order
+    }
+}
+
+extension Teacher: Equatable {
+    static func ==(lhs: Teacher, rhs: Teacher) -> Bool {
+        return lhs.name == rhs.name && lhs.subjectCount == rhs.subjectCount
+    }
+}
 
 
 
