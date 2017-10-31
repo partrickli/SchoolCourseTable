@@ -34,16 +34,9 @@ class StateController {
         }
     }
     
-    // schedule design to dictionanry for radom access convenience
-    var schedules: [GradeClass: [ScheduleTime: Course]] {
+    var schedules: [Schedule] {
         didSet {
-            let encoder = PropertyListEncoder()
-            do {
-                let data = try encoder.encode(schedules)
-                try data.write(to: StateController.scheduleURL)
-            } catch  {
-                print(error)
-            }
+            schedules.savePlist(to: StateController.scheduleURL)
         }
     }
     
@@ -57,15 +50,21 @@ class StateController {
         return courses.sorted { $0.subject.rawValue > $1.subject.rawValue }
     }
     
-    var courses = Array(repeating: Course(), count: 35)
     
     init() {
+        print("state controller initialization")
         teachers = StateController.reload(from: StateController.logsURL)
-        schedules = [:]
+        schedules = StateController.reload(from: StateController.scheduleURL)
+        for schedule in schedules {
+            print(schedule)
+        }
+        print("state initialization completed")
     }
     
     static func reload<T>(from url: URL) -> [T] {
-        let data = try! Data(contentsOf: url)
+        guard let data = try? Data(contentsOf: url) else {
+            return []
+        }
         let decoder = PropertyListDecoder()
         if let decoded = try? decoder.decode([T].self, from: data) {
             return decoded
@@ -76,6 +75,7 @@ class StateController {
     
     func reloadData() {
         self.teachers = StateController.reload(from: StateController.logsURL)
+        self.schedules = StateController.reload(from: StateController.scheduleURL)
     }
     
 }

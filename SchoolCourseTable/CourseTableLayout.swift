@@ -81,10 +81,6 @@ class CourseTableLayout: UICollectionViewLayout {
                     return max(currentMax, offset)
                 }
 
-                
-                print(indexPath)
-                print(attributes.frame.origin)
-                print()
             }
             
         }

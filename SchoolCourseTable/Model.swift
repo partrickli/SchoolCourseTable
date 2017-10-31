@@ -43,11 +43,11 @@ struct ScheduleTime: Codable {
 
 // Course Schedule
 
-//struct Schedule: Codable {
-//    let course: Course
-//    let time: ScheduleTime
-//    let gradeClass: GradeClass
-//}
+struct Schedule: Codable {
+    let course: Course
+    let time: ScheduleTime
+    let gradeClass: GradeClass
+}
 
 // Wrapper Class of Course for NSItemProvider
 
@@ -181,7 +181,29 @@ extension Teacher: Equatable {
     }
 }
 
+extension Schedule: Equatable {
+    static func ==(lhs: Schedule, rhs: Schedule) -> Bool {
+        return lhs.course == rhs.course && lhs.time == rhs.time && lhs.gradeClass == rhs.gradeClass
+    }
+}
 
+extension Schedule: CustomStringConvertible {
+    var description: String {
+        return "\(time.description) \(gradeClass.description): \(course.description)"
+    }
+}
+
+extension ScheduleTime: CustomStringConvertible {
+    var description: String {
+        return "星期\(day) 第\(order)节"
+    }
+}
+
+extension GradeClass: CustomStringConvertible {
+    var description: String {
+        return "\(grade)年级\(classInGrade)班"
+    }
+}
 
 
 

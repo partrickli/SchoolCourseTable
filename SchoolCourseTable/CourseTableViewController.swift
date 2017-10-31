@@ -49,6 +49,7 @@ class CourseTableViewController: UIViewController {
         courseSelectionCollectionView.reloadData()
     }
     
+    
 }
 
 extension CourseTableViewController: UICollectionViewDragDelegate {
@@ -85,7 +86,7 @@ extension CourseTableViewController: UICollectionViewDropDelegate {
         if coordinator.session.canLoadObjects(ofClass: CourseItemProvider.self) {
             coordinator.session.loadObjects(ofClass: CourseItemProvider.self) { courseItemProviders in
                 if let courseItemProvider = courseItemProviders.first as? CourseItemProvider {
-                    self.courseTableCollectionViewDataSource.courses[destinationIndexPath.section].courses[destinationIndexPath.item] = courseItemProvider.value
+                    self.courseTableCollectionViewDataSource.courses[destinationIndexPath.section][destinationIndexPath.row] = courseItemProvider.value
                     collectionView.reloadItems(at: [destinationIndexPath])
                 }
             }
@@ -111,24 +112,48 @@ extension CourseTableViewController: UICollectionViewDelegateFlowLayout {
 
 class CourseTableCollectionViewDataSource: NSObject {
     
-    let stateController: StateController
+    private let stateController: StateController
     
-    let workDayPerWeek = ["星期一", "星期二", "星期三", "星期四", "星期五"]
+    let coursePerDay = 7
+    let classCount = 5
     
-    struct DayCourses {
-        let weekDay: String
-        var courses: [Course]
+    var courses: [Array<Course>] {
+        didSet {
+            stateController.schedules = format(from: courses)
+        }
     }
     
-    var courses: [DayCourses] = []
+    
+    func format(from courses: [Array<Course>]) -> [Schedule] {
+        let schedules = courses.enumerated().flatMap { (section, coursesPerSection) -> Array<Schedule> in
+            let day = section + 1
+            let schedulesPerSection = coursesPerSection.enumerated().map { (row, course) -> Schedule in
+                let time = ScheduleTime(day: day, order: row / classCount + 1)
+                let gradeClass = GradeClass(grade: 1, classInGrade: row % classCount + 1)
+                return Schedule(course: course, time: time, gradeClass: gradeClass)
+            }
+            return schedulesPerSection
+        }
+        return schedules
+    }
     
     init(stateController: StateController) {
         self.stateController = stateController
-        self.courses = workDayPerWeek.map { day in
-            let teacher = Teacher(name: "", subjectCount: [:])
-            let count = stateController.coursePerDay * stateController.classCountPerGrade
-            let courses = Array(repeating: Course(teacher: teacher, subject: .blank), count: count)
-            return DayCourses(weekDay: day, courses: courses)
+        
+
+        let coursePerSection = coursePerDay * classCount
+        self.courses = (0..<5).map { _ in
+            (0..<coursePerSection).map { _ in
+                return Course()
+            }
+        }
+        
+        for schedule in stateController.schedules {
+            let section = schedule.time.day - 1
+            let order = schedule.time.order
+            let classInGrade = schedule.gradeClass.classInGrade
+            let row = (order - 1) * classCount + (classInGrade - 1)
+            courses[section][row] = schedule.course
         }
     }
     
@@ -138,6 +163,17 @@ class CourseTableCollectionViewDataSource: NSObject {
         return (order, classIndex)
     }
     
+//    func archive(course: Course, at indexPath: IndexPath, to stateController: StateController) {
+//        let (order, classIndex) = convert(indexPath: indexPath)
+//        let day = indexPath.section + 1
+//        let time = ScheduleTime(day: day, order: order)
+//        let gradeClass = GradeClass(grade: 1, classInGrade: classIndex)
+//        let schedule = Schedule(course: course, time: time, gradeClass: gradeClass)
+//        let destiIndex = stateController.schedules.index { $0.gradeClass == schedule.gradeClass && $0.time == schedule.time }
+//        if destiIndex != nil {
+//            stateController.schedules[destiIndex!] = schedule
+//        }
+//    }
 }
 
 extension CourseTableCollectionViewDataSource: UICollectionViewDataSource {
@@ -152,15 +188,15 @@ extension CourseTableCollectionViewDataSource: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SchoolCourseCell", for: indexPath) as! SchoolCourseCell
-        let coursesOfDay = courses[indexPath.section].courses
-        cell.subjectLabel.text = coursesOfDay[indexPath.item].subject.rawValue
-        cell.teacherNameLabel.text = coursesOfDay[indexPath.item].teacher.name
+        let course = courses[indexPath.section][indexPath.row]
+        cell.subjectLabel.text = course.subject.rawValue
+        cell.teacherNameLabel.text = course.teacher.name
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let view = collectionView.dequeueReusableSupplementaryView(ofKind: CourseTableLayout.Element.TableHeader.kind, withReuseIdentifier: "CourseTableHeader", for: indexPath) as! CourseTableHeaderView
-        view.label.text = workDayPerWeek[indexPath.section]
+        view.label.text = "星期\(indexPath.section)"
         return view
     }
     
