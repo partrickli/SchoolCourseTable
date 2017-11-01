@@ -133,7 +133,6 @@ class SubjectSelectionCell: UITableViewCell {
     
     @IBAction func changeSubjectCount(_ sender: UIStepper) {
         
-        print("stepper button pressed")
         subjectCountLabel.text = String(Int(sender.value))
         
     }

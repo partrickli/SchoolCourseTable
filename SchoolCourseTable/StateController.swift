@@ -52,13 +52,8 @@ class StateController {
     
     
     init() {
-        print("state controller initialization")
         teachers = StateController.reload(from: StateController.logsURL)
         schedules = StateController.reload(from: StateController.scheduleURL)
-        for schedule in schedules {
-            print(schedule)
-        }
-        print("state initialization completed")
     }
     
     static func reload<T>(from url: URL) -> [T] {

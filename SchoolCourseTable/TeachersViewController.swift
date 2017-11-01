@@ -28,6 +28,19 @@ class TeachersViewController: UIViewController {
         stateController.teachers.append(newTeacher!)
         teachersView.reloadData()
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let teacherDetailController = segue.destination as? TeacherDetailController else {
+            return
+        }
+        guard let cell = sender as? TeacherCell else {
+            return
+        }
+        if let indexPath = teachersView.indexPath(for: cell) {
+            let teacher = stateController.teachers[indexPath.row]
+            teacherDetailController.teacher = teacher
+        }
+    }
 
 }
 
