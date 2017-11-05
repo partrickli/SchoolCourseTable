@@ -74,8 +74,7 @@ class TeacherEditorController: UITableViewController {
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: "SubjectSelectionCell", for: indexPath) as! SubjectSelectionCell
-            let randomInt = Int(arc4random()) % Subject.all.count
-            let subjectCount = [Subject.all[indexPath.row]: randomInt]
+            let subjectCount = [Subject.all[indexPath.row]: 0]
             cell.subjectCount = subjectCount
             return cell
         default:

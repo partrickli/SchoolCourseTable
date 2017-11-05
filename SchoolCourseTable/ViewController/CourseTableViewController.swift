@@ -70,30 +70,27 @@ extension CourseTableViewController: UICollectionViewDragDelegate {
         let courseObject = CourseItemProvider(course ?? Course())
         let item = NSItemProvider(object: courseObject)
         let dragItem = UIDragItem(itemProvider: item)
+        dragItem.localObject = indexPath
         return [dragItem]
 
     }
     
 }
 
-// drag and drop
-
-//extension CourseTableViewController: UICollectionViewDragDelegate {
-//
-//    func collectionView(_ collectionView: UICollectionView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
-//        let item = NSItemProvider(object: NSString(string: courses[indexPath.item].teacher))
-//        let dragItem = UIDragItem(itemProvider: item)
-//        return [dragItem]
-//    }
-//
-//
-//}
 
 extension CourseTableViewController: UICollectionViewDropDelegate {
 
     func collectionView(_ collectionView: UICollectionView, performDropWith coordinator: UICollectionViewDropCoordinator) {
         
         let destinationIndexPath = coordinator.destinationIndexPath ?? IndexPath(item: 0, section: 0)
+        
+        if let dragItem = coordinator.session.items.first {
+            if let sourceIndexPath = dragItem.localObject as? IndexPath {
+                self.courseTableCollectionViewDataSource.courses[sourceIndexPath.section][sourceIndexPath.row] = Course()
+                collectionView.reloadItems(at: [sourceIndexPath])
+            }
+        }
+        
         
         if coordinator.session.canLoadObjects(ofClass: CourseItemProvider.self) {
             coordinator.session.loadObjects(ofClass: CourseItemProvider.self) { courseItemProviders in

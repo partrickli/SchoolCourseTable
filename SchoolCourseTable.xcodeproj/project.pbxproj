@@ -18,11 +18,9 @@
 		C01A530E1F78A1C20020A83C /* SchoolCourseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01A530D1F78A1C20020A83C /* SchoolCourseCell.swift */; };
 		C01A53101F78A4180020A83C /* CourseTableLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01A530F1F78A4180020A83C /* CourseTableLayout.swift */; };
 		C01DB93A1FA86D05006A4090 /* TeacherDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01DB9391FA86D05006A4090 /* TeacherDetailController.swift */; };
-		C05CCDC01F8E12360091DA96 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05CCDBF1F8E12360091DA96 /* Util.swift */; };
 		C08CBAC91F8F80BA00333532 /* TeacherEditorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08CBAC81F8F80BA00333532 /* TeacherEditorController.swift */; };
 		C0B7D0E11F97147E009EE67E /* StateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B7D0E01F97147E009EE67E /* StateController.swift */; };
 		C0B7D0E31F97194A009EE67E /* CourseSelectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B7D0E21F97194A009EE67E /* CourseSelectionCell.swift */; };
-		C0E8C5071F95E8160044BCD0 /* Teachers.plist in Resources */ = {isa = PBXBuildFile; fileRef = C0E8C5061F95E8160044BCD0 /* Teachers.plist */; };
 		C0F32DE11F7B9C440024226B /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F32DE01F7B9C440024226B /* Model.swift */; };
 		C0F32DE31F7B9E4C0024226B /* TeacherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F32DE21F7B9E4C0024226B /* TeacherCell.swift */; };
 /* End PBXBuildFile section */
@@ -41,11 +39,9 @@
 		C01A530D1F78A1C20020A83C /* SchoolCourseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SchoolCourseCell.swift; sourceTree = "<group>"; };
 		C01A530F1F78A4180020A83C /* CourseTableLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseTableLayout.swift; sourceTree = "<group>"; };
 		C01DB9391FA86D05006A4090 /* TeacherDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherDetailController.swift; sourceTree = "<group>"; };
-		C05CCDBF1F8E12360091DA96 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		C08CBAC81F8F80BA00333532 /* TeacherEditorController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherEditorController.swift; sourceTree = "<group>"; };
 		C0B7D0E01F97147E009EE67E /* StateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateController.swift; sourceTree = "<group>"; };
 		C0B7D0E21F97194A009EE67E /* CourseSelectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseSelectionCell.swift; sourceTree = "<group>"; };
-		C0E8C5061F95E8160044BCD0 /* Teachers.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Teachers.plist; sourceTree = "<group>"; };
 		C0F32DE01F7B9C440024226B /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		C0F32DE21F7B9E4C0024226B /* TeacherCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -80,27 +76,57 @@
 		C01A52F61F789F2D0020A83C /* SchoolCourseTable */ = {
 			isa = PBXGroup;
 			children = (
+				C09E98521FAB39E4002F9282 /* Model */,
+				C09E98531FAB3A13002F9282 /* ViewController */,
+				C09E98541FAB3A31002F9282 /* View */,
+				C09E98551FAB3A40002F9282 /* Layout */,
 				C01A52F71F789F2D0020A83C /* AppDelegate.swift */,
-				C0F32DE01F7B9C440024226B /* Model.swift */,
-				C05CCDBF1F8E12360091DA96 /* Util.swift */,
-				C01A52F91F789F2D0020A83C /* CourseTableViewController.swift */,
-				C01A52FB1F789F2D0020A83C /* TeachersViewController.swift */,
-				C0B7D0E01F97147E009EE67E /* StateController.swift */,
-				C08CBAC81F8F80BA00333532 /* TeacherEditorController.swift */,
-				C01A530D1F78A1C20020A83C /* SchoolCourseCell.swift */,
-				C01A530F1F78A4180020A83C /* CourseTableLayout.swift */,
-				C001E9D51F7CDEA5007E6867 /* CourseTableHeaderView.swift */,
 				C01A52FD1F789F2D0020A83C /* Main.storyboard */,
-				C01DB9391FA86D05006A4090 /* TeacherDetailController.swift */,
-				C0B7D0E21F97194A009EE67E /* CourseSelectionCell.swift */,
-				C001E9D71F7E1B76007E6867 /* CourseTableView.swift */,
-				C0F32DE21F7B9E4C0024226B /* TeacherCell.swift */,
-				C01A53001F789F2D0020A83C /* Assets.xcassets */,
 				C01A53021F789F2D0020A83C /* LaunchScreen.storyboard */,
+				C01A53001F789F2D0020A83C /* Assets.xcassets */,
 				C01A53051F789F2D0020A83C /* Info.plist */,
-				C0E8C5061F95E8160044BCD0 /* Teachers.plist */,
 			);
 			path = SchoolCourseTable;
+			sourceTree = "<group>";
+		};
+		C09E98521FAB39E4002F9282 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C0B7D0E01F97147E009EE67E /* StateController.swift */,
+				C0F32DE01F7B9C440024226B /* Model.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C09E98531FAB3A13002F9282 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				C01A52F91F789F2D0020A83C /* CourseTableViewController.swift */,
+				C01A52FB1F789F2D0020A83C /* TeachersViewController.swift */,
+				C08CBAC81F8F80BA00333532 /* TeacherEditorController.swift */,
+				C01DB9391FA86D05006A4090 /* TeacherDetailController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		C09E98541FAB3A31002F9282 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C0F32DE21F7B9E4C0024226B /* TeacherCell.swift */,
+				C01A530D1F78A1C20020A83C /* SchoolCourseCell.swift */,
+				C001E9D51F7CDEA5007E6867 /* CourseTableHeaderView.swift */,
+				C0B7D0E21F97194A009EE67E /* CourseSelectionCell.swift */,
+				C001E9D71F7E1B76007E6867 /* CourseTableView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		C09E98551FAB3A40002F9282 /* Layout */ = {
+			isa = PBXGroup;
+			children = (
+				C01A530F1F78A4180020A83C /* CourseTableLayout.swift */,
+			);
+			path = Layout;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -167,7 +193,6 @@
 				C01A53041F789F2D0020A83C /* LaunchScreen.storyboard in Resources */,
 				C01A53011F789F2D0020A83C /* Assets.xcassets in Resources */,
 				C01A52FF1F789F2D0020A83C /* Main.storyboard in Resources */,
-				C0E8C5071F95E8160044BCD0 /* Teachers.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -188,7 +213,6 @@
 				C01DB93A1FA86D05006A4090 /* TeacherDetailController.swift in Sources */,
 				C001E9D81F7E1B76007E6867 /* CourseTableView.swift in Sources */,
 				C01A53101F78A4180020A83C /* CourseTableLayout.swift in Sources */,
-				C05CCDC01F8E12360091DA96 /* Util.swift in Sources */,
 				C08CBAC91F8F80BA00333532 /* TeacherEditorController.swift in Sources */,
 				C01A52FA1F789F2D0020A83C /* CourseTableViewController.swift in Sources */,
 				C0F32DE31F7B9E4C0024226B /* TeacherCell.swift in Sources */,
