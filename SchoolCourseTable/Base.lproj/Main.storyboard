@@ -92,7 +92,7 @@
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="科目" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M55-fk-2wx">
                                                             <rect key="frame" x="13" y="0.5" width="35" height="20.5"/>
                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                                            <color key="textColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="教师名字" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eAD-Zp-Vpi">
@@ -329,13 +329,70 @@
         <scene sceneID="eOL-Gm-qWe">
             <objects>
                 <tableViewController id="zvA-lZ-BR2" customClass="TeacherDetailController" customModule="SchoolCourseTable" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="YzI-cR-Bsg">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="YzI-cR-Bsg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="TeacherDetailScheduleCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="TeacherDetailArrangedSchedule" id="VWM-zK-NJk" customClass="TeacherDetailScheduleCell" customModule="SchoolCourseTable" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="TeacherDetailScheduleCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="TeacherDetailCourseTable" rowHeight="404" id="BlS-mm-DeX" customClass="TeacherCourseTableCell" customModule="SchoolCourseTable" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="55.5" width="375" height="404"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="BlS-mm-DeX" id="SAa-7o-yBk">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="403.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="x2r-6E-gmJ">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="403.5"/>
+                                            <color key="backgroundColor" red="1" green="0.83234566450000003" blue="0.47320586440000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="403.5" id="N4M-ov-H4I"/>
+                                            </constraints>
+                                            <collectionViewLayout key="collectionViewLayout" id="qeU-9q-N0o" customClass="CourseTableLayout" customModule="SchoolCourseTable" customModuleProvider="target"/>
+                                            <cells>
+                                                <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SchoolCourseCell" id="4rM-n4-yyd" customClass="SchoolCourseCell" customModule="SchoolCourseTable" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="0.0" width="123" height="102"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                                        <rect key="frame" x="0.0" y="0.0" width="123" height="102"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="语文" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mu1-z6-z8D">
+                                                                <rect key="frame" x="8" y="8" width="107" height="86"/>
+                                                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                    </view>
+                                                    <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <constraints>
+                                                        <constraint firstItem="mu1-z6-z8D" firstAttribute="leading" secondItem="4rM-n4-yyd" secondAttribute="leadingMargin" id="8nL-bo-4KV"/>
+                                                        <constraint firstAttribute="trailingMargin" secondItem="mu1-z6-z8D" secondAttribute="trailing" id="RoP-92-P3o"/>
+                                                        <constraint firstItem="mu1-z6-z8D" firstAttribute="top" secondItem="4rM-n4-yyd" secondAttribute="topMargin" id="TdQ-04-Pph"/>
+                                                        <constraint firstAttribute="bottomMargin" secondItem="mu1-z6-z8D" secondAttribute="bottom" id="X5f-JV-iXP"/>
+                                                    </constraints>
+                                                    <size key="customSize" width="123" height="102"/>
+                                                    <connections>
+                                                        <outlet property="subjectLabel" destination="mu1-z6-z8D" id="eJa-5C-Gpw"/>
+                                                    </connections>
+                                                </collectionViewCell>
+                                            </cells>
+                                        </collectionView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="x2r-6E-gmJ" firstAttribute="leading" secondItem="SAa-7o-yBk" secondAttribute="leading" id="RJ5-x1-GqA"/>
+                                        <constraint firstItem="x2r-6E-gmJ" firstAttribute="top" secondItem="SAa-7o-yBk" secondAttribute="top" id="jj1-OW-tqS"/>
+                                        <constraint firstAttribute="trailing" secondItem="x2r-6E-gmJ" secondAttribute="trailing" id="p5c-lk-6ID"/>
+                                        <constraint firstAttribute="bottom" secondItem="x2r-6E-gmJ" secondAttribute="bottom" id="rgo-5U-oan"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="courseTableCollectionView" destination="x2r-6E-gmJ" id="29t-XD-Bd6"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TeacherDetailArrangedSchedule" id="VWM-zK-NJk" customClass="TeacherDetailScheduleCell" customModule="SchoolCourseTable" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="459.5" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="VWM-zK-NJk" id="Wh2-Ao-06A">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -387,7 +444,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wrR-qZ-cYq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2764" y="948"/>
+            <point key="canvasLocation" x="2764" y="947.67616191904051"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">

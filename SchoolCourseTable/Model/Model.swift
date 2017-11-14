@@ -205,7 +205,16 @@ extension GradeClass: CustomStringConvertible {
     }
 }
 
+// blank schedule initializer
+extension Schedule {
+    
+}
 
+extension Teacher {
+    init() {
+        self = Teacher(name: "", subjectCount: [:])
+    }
+}
 
 
 

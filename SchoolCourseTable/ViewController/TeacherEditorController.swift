@@ -8,88 +8,96 @@
 
 import UIKit
 
+fileprivate struct Section {
+    
+    enum SectionType: Int {
+        case profile
+        case course
+    }
+    
+    enum ItemType: Int {
+        case teacher
+        case courseTable
+    }
+    
+    let sectionType: SectionType
+    var items: [ItemType]
+
+}
+
+extension Array where Element == Section {
+    var sectionIndices: [Section.SectionType: Int] {
+        let keys = self.map { $0.sectionType }
+        return Dictionary(uniqueKeysWithValues: zip(keys, indices))
+    }
+}
 class TeacherEditorController: UITableViewController {
     
-    var teacher: Teacher!
-    {
-        get {
-            guard let nameCell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? TeacherNameCell,
-                let name = nameCell.teacherNameTextField.text else {
-                return nil
-            }
-            let numberOfRowsInSubjectSection = tableView.numberOfRows(inSection: 1)
-            let indexPathsInSubjectSection = (0..<numberOfRowsInSubjectSection).map { row in
-                return IndexPath(row: row, section: 1)
-            }
-            let subjectCountPair = indexPathsInSubjectSection.flatMap { indexPath -> (Subject, Int)? in
-                let cell = tableView.cellForRow(at: indexPath) as! SubjectSelectionCell
-                if let subject = Subject(rawValue: cell.subjectLabel.text!),
-                    let count = Int(cell.subjectCountLabel.text!), count != 0 {
-                    return (subject, count)
-                } else {
-                    return nil
-                }
-            }
-            let subjectCount = Dictionary(uniqueKeysWithValues: subjectCountPair)
-            return Teacher(name: name, subjectCount: subjectCount)
-        }
-        
-        set {
+    private let sections: [Section] = [
+        Section(
+            sectionType: .profile,
+            items: [.teacher]
+        ),
+        Section(
+            sectionType: .course,
+            items: Array(repeating: .courseTable, count: Subject.all.count)
+        )
+    ]
+    
+    var teacher: Teacher = Teacher() {
+        didSet {
             tableView.reloadData()
         }
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    var newTeacher: Teacher {
+        let sectionIndices = sections.sectionIndices
+        let nameCell = tableView.cellForRow(at: IndexPath(item: 0, section: sectionIndices[Section.SectionType.profile]!)) as! TeacherNameCell
+        let name = nameCell.teacherName ?? ""
         
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+        let items = Subject.all.indices
+        let subjectCells = items.map { item -> SubjectSelectionCell in
+            let cell = tableView.cellForRow(at: IndexPath(item: item, section: sectionIndices[Section.SectionType.course]!))
+            return cell! as! SubjectSelectionCell
+        }
+        let subjectCountSequence = subjectCells.map { cell -> (Subject, Int) in
+            cell.subjectCount
+        }
+        let nonZeroSubjects = subjectCountSequence.filter { _, count in
+            count != 0
+        }
+        let count = Dictionary(uniqueKeysWithValues: nonZeroSubjects)
         
-        teacher = Teacher(name: "partrick", subjectCount: [.art: 1, .english: 2])
-
+        return Teacher(name: name, subjectCount: count)
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return sections.count
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch section {
-        case 0:
-            return 1
-        case 1:
-            return Subject.all.count
-        default:
-            return 0
-        }
+        return sections[section].items.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch indexPath.section {
-        case 0:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "TeacherNameCell") as! TeacherNameCell
-            cell.teacherNameTextField.text = "李老师"
+        switch sections[indexPath.section].items[indexPath.item] {
+        case .teacher:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "TeacherNameCell", for: indexPath) as! TeacherNameCell
+            cell.teacherName = teacher.name
             return cell
-        case 1:
+        case .courseTable:
             let cell = tableView.dequeueReusableCell(withIdentifier: "SubjectSelectionCell", for: indexPath) as! SubjectSelectionCell
-            let subjectCount = [Subject.all[indexPath.row]: 0]
-            cell.subjectCount = subjectCount
+            cell.subjectCount = (Subject.all[indexPath.item], 0)
             return cell
-        default:
-            return UITableViewCell()
         }
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        switch section {
-        case 0:
-            return "名字"
-        case 1:
-            return "课程"
-        default:
-            return ""
+        switch sections[section].sectionType {
+        case .profile:
+            return "简介"
+        case .course:
+            return "课程表"
         }
     }
     
@@ -102,8 +110,29 @@ class TeacherEditorController: UITableViewController {
 
 class TeacherNameCell: UITableViewCell {
     
+    struct TeacherProfile {
+        let name: String
+    }
+    
+    var teacherName: String? {
+        get {
+            return teacherNameTextField.text
+        }
+        set {
+            teacherNameTextField.text = newValue
+        }
+    }
+    
     @IBOutlet weak var teacherNameTextField: UITextField!
     
+}
+
+extension TeacherNameCell.TeacherProfile {
+    
+    init(teacher: Teacher) {
+        name = teacher.name
+    }
+
 }
 
 class SubjectSelectionCell: UITableViewCell {
@@ -111,22 +140,20 @@ class SubjectSelectionCell: UITableViewCell {
     @IBOutlet weak var subjectLabel: UILabel!
     @IBOutlet weak var subjectCountLabel: UILabel!
     
-    var subjectCount: [Subject: Int] {
+    var subjectCount: (key: Subject, value: Int) {
         
         get {
-            if let subjectString = subjectLabel.text,
-                let subject = Subject(rawValue: subjectString),
-                let countString = subjectCountLabel.text,
-                let count = Int(countString) {
-                return [subject: count]
+            if let subject = Subject(rawValue: subjectLabel.text!),
+                let count = Int(subjectCountLabel.text!) {
+                return (subject, count)
             } else {
-                return [Subject.blank: 0]
+                return (Subject.blank, 0)
             }
         }
         
         set {
-            subjectLabel.text = newValue.keys.first?.rawValue
-            subjectCountLabel.text = String(describing: newValue.values.first ?? 0)
+            subjectLabel.text = newValue.key.rawValue
+            subjectCountLabel.text = "\(newValue.value)"
         }
     }
     

@@ -13,15 +13,10 @@ class TeacherCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var capableCoursesLabel: UILabel!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    public func config(with teacher: Teacher) {
+        nameLabel.text = teacher.name
+        capableCoursesLabel.text = teacher.subjectCount.map {
+            " \($0.key.rawValue):\($0.value) "
+        }.joined()
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
 }

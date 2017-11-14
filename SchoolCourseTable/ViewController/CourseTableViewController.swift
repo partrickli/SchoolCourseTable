@@ -10,9 +10,8 @@ import UIKit
 
 class CourseTableViewController: UIViewController {
     
-    var stateController: StateController!
-    var courseTableCollectionViewDataSource: CourseTableCollectionViewDataSource!
-    var courseSelectionCollectionViewDataSource: CourseSelectionCollectionViewDataSource!
+    var courseTableDataSource: CourseTableDataSource!
+    var courseSelectionDataSource: CourseSelectionDataSource!
     
     @IBOutlet weak var courseTableCollectionView: UICollectionView!
     @IBOutlet weak var courseSelectionCollectionView: UICollectionView!
@@ -21,25 +20,24 @@ class CourseTableViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        stateController = StateController()
         
-        courseTableCollectionViewDataSource = CourseTableCollectionViewDataSource(stateController: stateController)
-        courseTableCollectionView.dataSource = courseTableCollectionViewDataSource
+        courseTableDataSource = CourseTableDataSource()
+        courseTableCollectionView.dataSource = courseTableDataSource
         
-        courseSelectionCollectionViewDataSource = CourseSelectionCollectionViewDataSource(stateController: stateController)
-        courseSelectionCollectionView.dataSource = courseSelectionCollectionViewDataSource
+        courseSelectionDataSource = CourseSelectionDataSource()
+        courseSelectionCollectionView.dataSource = courseSelectionDataSource
         
         courseTableCollectionView.register(CourseTableHeaderView.self, forSupplementaryViewOfKind: CourseTableLayout.Element.TableHeader.kind, withReuseIdentifier: "CourseTableHeader")
         
         // Course Table Collection View Drop interaction and drag interaction
         courseTableCollectionView.dragInteractionEnabled = true
-        courseTableCollectionView.dragDelegate = self
+//        courseTableCollectionView.dragDelegate = self
         courseTableCollectionView.dropDelegate = self
 
         // Course Selection Collection View Drag Interaction
         
         courseSelectionCollectionView.dragInteractionEnabled = true
-        courseSelectionCollectionView.dragDelegate = self
+        courseSelectionCollectionView.dragDelegate = courseSelectionDataSource
         
         // customize appearence
         
@@ -47,34 +45,23 @@ class CourseTableViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        stateController.reloadData()
+        courseSelectionDataSource.reloadData()
         courseSelectionCollectionView.reloadData()
     }
     
     
 }
 
-extension CourseTableViewController: UICollectionViewDragDelegate {
-    
+
+extension CourseSelectionDataSource: UICollectionViewDragDelegate {
     func collectionView(_ collectionView: UICollectionView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
-        
-        var course: Course?
-        
-        if collectionView == courseSelectionCollectionView {
-            course = stateController.availableCourses[indexPath.item]
-        } else if collectionView == courseTableCollectionView {
-            course = courseTableCollectionViewDataSource.courses[indexPath.section][indexPath.row]
-        }
-        
-        let courseObject = CourseItemProvider(course ?? Course())
+        let course = courses[indexPath.item]
+        let courseObject = CourseItemProvider(course)
         let item = NSItemProvider(object: courseObject)
         let dragItem = UIDragItem(itemProvider: item)
         dragItem.localObject = indexPath
         return [dragItem]
-
     }
-    
 }
 
 
@@ -86,7 +73,7 @@ extension CourseTableViewController: UICollectionViewDropDelegate {
         
         if let dragItem = coordinator.session.items.first {
             if let sourceIndexPath = dragItem.localObject as? IndexPath {
-                self.courseTableCollectionViewDataSource.courses[sourceIndexPath.section][sourceIndexPath.row] = Course()
+//                self.courseTableDataSource.courses[sourceIndexPath.section][sourceIndexPath.row] = Course()
                 collectionView.reloadItems(at: [sourceIndexPath])
             }
         }
@@ -95,7 +82,7 @@ extension CourseTableViewController: UICollectionViewDropDelegate {
         if coordinator.session.canLoadObjects(ofClass: CourseItemProvider.self) {
             coordinator.session.loadObjects(ofClass: CourseItemProvider.self) { courseItemProviders in
                 if let courseItemProvider = courseItemProviders.first as? CourseItemProvider {
-                    self.courseTableCollectionViewDataSource.courses[destinationIndexPath.section][destinationIndexPath.row] = courseItemProvider.value
+//                    self.courseTableDataSource.courses[destinationIndexPath.section][destinationIndexPath.row] = courseItemProvider.value
                     collectionView.reloadItems(at: [destinationIndexPath])
                 }
             }
@@ -119,107 +106,27 @@ extension CourseTableViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
-class CourseTableCollectionViewDataSource: NSObject {
-    
-    private let stateController: StateController
-    
-    let coursePerDay = 7
-    let classCount = 5
-    
-    var courses: [Array<Course>] {
-        didSet {
-            stateController.schedules = format(from: courses)
-        }
-    }
-    
-    
-    func format(from courses: [Array<Course>]) -> [Schedule] {
-        let schedules = courses.enumerated().flatMap { (section, coursesPerSection) -> Array<Schedule> in
-            let day = section + 1
-            let schedulesPerSection = coursesPerSection.enumerated().map { (row, course) -> Schedule in
-                let time = ScheduleTime(day: day, order: row / classCount + 1)
-                let gradeClass = GradeClass(grade: 1, classInGrade: row % classCount + 1)
-                return Schedule(course: course, time: time, gradeClass: gradeClass)
-            }
-            return schedulesPerSection
-        }
-        return schedules
-    }
-    
-    init(stateController: StateController) {
-        self.stateController = stateController
-        
 
-        let coursePerSection = coursePerDay * classCount
-        self.courses = (0..<5).map { _ in
-            (0..<coursePerSection).map { _ in
-                return Course()
-            }
-        }
-        
-        for schedule in stateController.schedules {
-            let section = schedule.time.day - 1
-            let order = schedule.time.order
-            let classInGrade = schedule.gradeClass.classInGrade
-            let row = (order - 1) * classCount + (classInGrade - 1)
-            courses[section][row] = schedule.course
-        }
-    }
+class CourseSelectionDataSource: NSObject {
     
-    func convert(indexPath: IndexPath) -> (Int, Int) {
-        let order = indexPath.item / stateController.classCountPerGrade
-        let classIndex = indexPath.item % stateController.classCountPerGrade
-        return (order, classIndex)
-    }
+    var courses: [Course] = []
     
+    func reloadData() {
+        let storage = StorageController()
+        courses = storage.availableCourses
+    }
 }
 
-extension CourseTableCollectionViewDataSource: UICollectionViewDataSource {
-    
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 5 // five workday per week
-    }
+extension CourseSelectionDataSource: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return stateController.totalCoursePerDay
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SchoolCourseCell", for: indexPath) as! SchoolCourseCell
-        let course = courses[indexPath.section][indexPath.row]
-        cell.subjectLabel.text = course.subject.rawValue
-        cell.teacherNameLabel.text = course.teacher.name
-        return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let view = collectionView.dequeueReusableSupplementaryView(ofKind: CourseTableLayout.Element.TableHeader.kind, withReuseIdentifier: "CourseTableHeader", for: indexPath) as! CourseTableHeaderView
-        view.label.text = "星期\(indexPath.section + 1)"
-        return view
-    }
-    
-}
-
-class CourseSelectionCollectionViewDataSource: NSObject {
-    
-    let stateController: StateController
-        
-    init(stateController: StateController) {
-        self.stateController = stateController
-    }
-    
-}
-
-extension CourseSelectionCollectionViewDataSource: UICollectionViewDataSource {
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return stateController.availableCourses.count
+        return courses.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CourseSelectionCell", for: indexPath) as! CourseSelectionCell
-        cell.subjectLabel.text = stateController.availableCourses[indexPath.item].subject.rawValue
-        cell.teacherNameLabel.text = stateController.availableCourses[indexPath.item].teacher.name
+        let courseData = CourseSelectionCell.CourseSelectionData(course: courses[indexPath.item])
+        cell.courseSelectionData = courseData
         return cell
     }
     
