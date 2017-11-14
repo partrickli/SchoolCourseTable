@@ -77,3 +77,15 @@ extension CourseTableDataSource: UICollectionViewDataSource {
     
 }
 
+extension CourseTableDataSource: UICollectionViewDragDelegate {
+    func collectionView(_ collectionView: UICollectionView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+        let course = courses[indexPath.section][indexPath.item]
+        let courseObject = CourseItemProvider(course)
+        let item = NSItemProvider(object: courseObject)
+        let dragItem = UIDragItem(itemProvider: item)
+        dragItem.localObject = indexPath
+        return [dragItem]
+    }
+}
+
+

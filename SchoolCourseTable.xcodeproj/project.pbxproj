@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		C001E9D61F7CDEA5007E6867 /* CourseTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C001E9D51F7CDEA5007E6867 /* CourseTableHeaderView.swift */; };
 		C001E9D81F7E1B76007E6867 /* CourseTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C001E9D71F7E1B76007E6867 /* CourseTableView.swift */; };
+		C0143DAF1FBB42CC006FD4FF /* CourseSelectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0143DAE1FBB42CC006FD4FF /* CourseSelectionDataSource.swift */; };
 		C01A52F81F789F2D0020A83C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01A52F71F789F2D0020A83C /* AppDelegate.swift */; };
 		C01A52FA1F789F2D0020A83C /* CourseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01A52F91F789F2D0020A83C /* CourseTableViewController.swift */; };
 		C01A52FC1F789F2D0020A83C /* TeachersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01A52FB1F789F2D0020A83C /* TeachersViewController.swift */; };
@@ -33,6 +34,7 @@
 /* Begin PBXFileReference section */
 		C001E9D51F7CDEA5007E6867 /* CourseTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseTableHeaderView.swift; sourceTree = "<group>"; };
 		C001E9D71F7E1B76007E6867 /* CourseTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseTableView.swift; sourceTree = "<group>"; };
+		C0143DAE1FBB42CC006FD4FF /* CourseSelectionDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseSelectionDataSource.swift; sourceTree = "<group>"; };
 		C01A52F41F789F2D0020A83C /* SchoolCourseTable.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SchoolCourseTable.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C01A52F71F789F2D0020A83C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C01A52F91F789F2D0020A83C /* CourseTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseTableViewController.swift; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				C01A52F91F789F2D0020A83C /* CourseTableViewController.swift */,
+				C0143DAE1FBB42CC006FD4FF /* CourseSelectionDataSource.swift */,
 				C08B8A011FB04872007D07DA /* CourseTableDataSource.swift */,
 				C08B8A031FB05A66007D07DA /* TeacherPersonalCourseTableDataSource.swift */,
 				C01A52FB1F789F2D0020A83C /* TeachersViewController.swift */,
@@ -235,6 +238,7 @@
 				C01A52F81F789F2D0020A83C /* AppDelegate.swift in Sources */,
 				C001E9D61F7CDEA5007E6867 /* CourseTableHeaderView.swift in Sources */,
 				C0F32DE11F7B9C440024226B /* Model.swift in Sources */,
+				C0143DAF1FBB42CC006FD4FF /* CourseSelectionDataSource.swift in Sources */,
 				C01DB93A1FA86D05006A4090 /* TeacherDetailController.swift in Sources */,
 				C001E9D81F7E1B76007E6867 /* CourseTableView.swift in Sources */,
 				C01A53101F78A4180020A83C /* CourseTableLayout.swift in Sources */,
