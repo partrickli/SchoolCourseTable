@@ -48,7 +48,7 @@
 		C01DB9391FA86D05006A4090 /* TeacherDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherDetailController.swift; sourceTree = "<group>"; };
 		C08B89FD1FB0379D007D07DA /* TeacherDetailScheduleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherDetailScheduleCell.swift; sourceTree = "<group>"; };
 		C08B89FF1FB03863007D07DA /* TeacherCourseTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherCourseTableCell.swift; sourceTree = "<group>"; };
-		C08B8A011FB04872007D07DA /* CourseTableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CourseTableDataSource.swift; path = SchoolCourseTable/View/CourseTableDataSource.swift; sourceTree = SOURCE_ROOT; };
+		C08B8A011FB04872007D07DA /* CourseTableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CourseTableDataSource.swift; path = "SchoolCourseTable/New Group/CourseTableDataSource.swift"; sourceTree = SOURCE_ROOT; };
 		C08B8A031FB05A66007D07DA /* TeacherPersonalCourseTableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherPersonalCourseTableDataSource.swift; sourceTree = "<group>"; };
 		C08B8A051FB14DD1007D07DA /* DataStructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStructure.swift; sourceTree = "<group>"; };
 		C08B8A081FB2A569007D07DA /* StorageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageController.swift; sourceTree = "<group>"; };
@@ -88,9 +88,10 @@
 		C01A52F61F789F2D0020A83C /* SchoolCourseTable */ = {
 			isa = PBXGroup;
 			children = (
+				C09E98531FAB3A13002F9282 /* ViewController */,
+				C062CDF11FBD2C6B00F88999 /* DataSource */,
 				C08B8A071FB14DE5007D07DA /* Util */,
 				C09E98521FAB39E4002F9282 /* Model */,
-				C09E98531FAB3A13002F9282 /* ViewController */,
 				C09E98541FAB3A31002F9282 /* View */,
 				C09E98551FAB3A40002F9282 /* Layout */,
 				C01A52F71F789F2D0020A83C /* AppDelegate.swift */,
@@ -100,6 +101,17 @@
 				C01A53051F789F2D0020A83C /* Info.plist */,
 			);
 			path = SchoolCourseTable;
+			sourceTree = "<group>";
+		};
+		C062CDF11FBD2C6B00F88999 /* DataSource */ = {
+			isa = PBXGroup;
+			children = (
+				C08B8A011FB04872007D07DA /* CourseTableDataSource.swift */,
+				C0143DAE1FBB42CC006FD4FF /* CourseSelectionDataSource.swift */,
+				C08B8A031FB05A66007D07DA /* TeacherPersonalCourseTableDataSource.swift */,
+			);
+			name = DataSource;
+			path = "New Group";
 			sourceTree = "<group>";
 		};
 		C08B8A071FB14DE5007D07DA /* Util */ = {
@@ -123,9 +135,6 @@
 			isa = PBXGroup;
 			children = (
 				C01A52F91F789F2D0020A83C /* CourseTableViewController.swift */,
-				C0143DAE1FBB42CC006FD4FF /* CourseSelectionDataSource.swift */,
-				C08B8A011FB04872007D07DA /* CourseTableDataSource.swift */,
-				C08B8A031FB05A66007D07DA /* TeacherPersonalCourseTableDataSource.swift */,
 				C01A52FB1F789F2D0020A83C /* TeachersViewController.swift */,
 				C08CBAC81F8F80BA00333532 /* TeacherEditorController.swift */,
 				C01DB9391FA86D05006A4090 /* TeacherDetailController.swift */,

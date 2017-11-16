@@ -20,7 +20,6 @@ class CourseTableViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         courseTableDataSource = CourseTableDataSource()
         courseTableCollectionView.dataSource = courseTableDataSource
         
@@ -32,7 +31,7 @@ class CourseTableViewController: UIViewController {
         // Course Table Collection View Drop interaction and drag interaction
         courseTableCollectionView.dragInteractionEnabled = true
         courseTableCollectionView.dragDelegate = courseTableDataSource
-        courseTableCollectionView.dropDelegate = self
+        courseTableCollectionView.dropDelegate = courseTableDataSource
 
         // Course Selection Collection View Drag Interaction
         
@@ -55,40 +54,7 @@ class CourseTableViewController: UIViewController {
 
 
 
-extension CourseTableViewController: UICollectionViewDropDelegate {
 
-    func collectionView(_ collectionView: UICollectionView, performDropWith coordinator: UICollectionViewDropCoordinator) {
-        
-        let destinationIndexPath = coordinator.destinationIndexPath ?? IndexPath(item: 0, section: 0)
-        
-        if let dragItem = coordinator.session.items.first {
-            if let sourceIndexPath = dragItem.localObject as? IndexPath {
-//                self.courseTableDataSource.courses[sourceIndexPath.section][sourceIndexPath.row] = Course()
-                collectionView.reloadItems(at: [sourceIndexPath])
-            }
-        }
-        
-        
-        if coordinator.session.canLoadObjects(ofClass: CourseItemProvider.self) {
-            coordinator.session.loadObjects(ofClass: CourseItemProvider.self) { courseItemProviders in
-                if let courseItemProvider = courseItemProviders.first as? CourseItemProvider {
-//                    self.courseTableDataSource.courses[destinationIndexPath.section][destinationIndexPath.row] = courseItemProvider.value
-                    collectionView.reloadItems(at: [destinationIndexPath])
-                }
-            }
-            
-        }
-        
-    }
-
-    func collectionView(_ collectionView: UICollectionView, canHandle session: UIDropSession) -> Bool {
-        return true
-    }
-
-    func collectionView(_ collectionView: UICollectionView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UICollectionViewDropProposal {
-        return UICollectionViewDropProposal(operation: .move, intent: .insertIntoDestinationIndexPath)
-    }
-}
 
 extension CourseTableViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
