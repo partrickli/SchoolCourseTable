@@ -26,7 +26,6 @@
 		C08B8A061FB14DD1007D07DA /* DataStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08B8A051FB14DD1007D07DA /* DataStructure.swift */; };
 		C08B8A091FB2A569007D07DA /* StorageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08B8A081FB2A569007D07DA /* StorageController.swift */; };
 		C08CBAC91F8F80BA00333532 /* TeacherEditorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08CBAC81F8F80BA00333532 /* TeacherEditorController.swift */; };
-		C0B7D0E31F97194A009EE67E /* CourseSelectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B7D0E21F97194A009EE67E /* CourseSelectionCell.swift */; };
 		C0F32DE11F7B9C440024226B /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F32DE01F7B9C440024226B /* Model.swift */; };
 		C0F32DE31F7B9E4C0024226B /* TeacherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F32DE21F7B9E4C0024226B /* TeacherCell.swift */; };
 /* End PBXBuildFile section */
@@ -53,7 +52,6 @@
 		C08B8A051FB14DD1007D07DA /* DataStructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStructure.swift; sourceTree = "<group>"; };
 		C08B8A081FB2A569007D07DA /* StorageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageController.swift; sourceTree = "<group>"; };
 		C08CBAC81F8F80BA00333532 /* TeacherEditorController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherEditorController.swift; sourceTree = "<group>"; };
-		C0B7D0E21F97194A009EE67E /* CourseSelectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseSelectionCell.swift; sourceTree = "<group>"; };
 		C0F32DE01F7B9C440024226B /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		C0F32DE21F7B9E4C0024226B /* TeacherCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -147,7 +145,6 @@
 			children = (
 				C0F32DE21F7B9E4C0024226B /* TeacherCell.swift */,
 				C01A530D1F78A1C20020A83C /* SchoolCourseCell.swift */,
-				C0B7D0E21F97194A009EE67E /* CourseSelectionCell.swift */,
 				C08B89FF1FB03863007D07DA /* TeacherCourseTableCell.swift */,
 				C001E9D51F7CDEA5007E6867 /* CourseTableHeaderView.swift */,
 				C08B89FD1FB0379D007D07DA /* TeacherDetailScheduleCell.swift */,
@@ -243,7 +240,6 @@
 				C08B8A091FB2A569007D07DA /* StorageController.swift in Sources */,
 				C08B8A061FB14DD1007D07DA /* DataStructure.swift in Sources */,
 				C01A52FC1F789F2D0020A83C /* TeachersViewController.swift in Sources */,
-				C0B7D0E31F97194A009EE67E /* CourseSelectionCell.swift in Sources */,
 				C01A52F81F789F2D0020A83C /* AppDelegate.swift in Sources */,
 				C001E9D61F7CDEA5007E6867 /* CourseTableHeaderView.swift in Sources */,
 				C0F32DE11F7B9C440024226B /* Model.swift in Sources */,

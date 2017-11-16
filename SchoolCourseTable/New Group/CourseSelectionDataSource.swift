@@ -26,9 +26,9 @@ extension CourseSelectionDataSource: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CourseSelectionCell", for: indexPath) as! CourseSelectionCell
-        let courseData = CourseSelectionCell.CourseSelectionData(course: courses[indexPath.item])
-        cell.courseSelectionData = courseData
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SchoolCourseCell", for: indexPath) as! SchoolCourseCell
+        
+        cell.viewModel = SchoolCourseCell.ViewModel(course: courses[indexPath.item])
         return cell
     }
     

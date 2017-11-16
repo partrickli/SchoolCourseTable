@@ -10,37 +10,42 @@ import UIKit
 
 class SchoolCourseCell: UICollectionViewCell {
     
-    struct CourseData {
+    struct ViewModel {
         let subject: String
         let teacherName: String
     }
     
     required init?(coder aDecoder: NSCoder) {
-        courseData = CourseData(subject: "默认", teacherName: "默认")
+        viewModel = ViewModel(subject: "默认", teacherName: "默认")
         super.init(coder: aDecoder)
-        backgroundColor = .white
         
-        layer.cornerRadius = 5
+        layer.cornerRadius = 4
         layer.masksToBounds = true
         layer.borderWidth = 1
         
     }
     
-    @IBOutlet weak var subjectLabel: UILabel!
-    @IBOutlet weak var teacherNameLabel: UILabel!
+    @IBOutlet private weak var subjectLabel: UILabel!
+    @IBOutlet private weak var teacherNameLabel: UILabel!
     
-    var courseData: CourseData {
+    var viewModel: ViewModel {
         didSet {
-            subjectLabel.text = courseData.subject
-            teacherNameLabel.text = courseData.teacherName
+            subjectLabel.text = viewModel.subject
+            teacherNameLabel.text = viewModel.teacherName
         }
     }
 }
 
-extension SchoolCourseCell.CourseData {
+extension SchoolCourseCell.ViewModel {
+    
     init(course: Course) {
         subject = course.subject.rawValue
         teacherName = course.teacher.name
+    }
+    
+    init() {
+        subject = ""
+        teacherName = ""
     }
 }
 

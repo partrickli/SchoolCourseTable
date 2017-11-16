@@ -33,7 +33,7 @@ extension TeacherPersonalCourseTableDataSource: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SchoolCourseCell", for: indexPath) as! SchoolCourseCell
-        cell.subjectLabel.text = courses[indexPath.item].subject.rawValue
+//        cell.subjectLabel.text = courses[indexPath.item].subject.rawValue
         return cell
     }
     

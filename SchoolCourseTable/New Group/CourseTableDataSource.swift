@@ -64,8 +64,8 @@ extension CourseTableDataSource: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SchoolCourseCell", for: indexPath) as! SchoolCourseCell
-        let cellData = SchoolCourseCell.CourseData(course: courses[indexPath.section][indexPath.item])
-        cell.courseData = cellData
+        let cellData = SchoolCourseCell.ViewModel(course: courses[indexPath.section][indexPath.item])
+        cell.viewModel = cellData
         return cell
     }
     
