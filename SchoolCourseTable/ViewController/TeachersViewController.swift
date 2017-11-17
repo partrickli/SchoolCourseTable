@@ -58,7 +58,7 @@ extension TeachersViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TeacherCell", for: indexPath) as! TeacherCell
-        cell.config(with: teachers[indexPath.item])
+        cell.viewModel = TeacherCell.ViewModel(teacher: teachers[indexPath.item])
         return cell
     }
     
