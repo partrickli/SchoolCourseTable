@@ -10,19 +10,11 @@ import UIKit
 
 class TeachersViewController: UIViewController {
     
-    @IBOutlet weak var teachersView: UITableView!
-    let storage = StorageController()
+    let modelController = ModelController.shared
 
-    var teachers: [Teacher] = [] {
-        didSet {
-            storage.teachersResource.save(value: teachers)
-        }
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        teachers = storage.teachersResource.reload() ?? []
-    }
+    @IBOutlet weak var teachersView: UITableView!
+
+    var teachers: [Teacher]!
 
     
     // unwind segue from teacher editor view controller
@@ -31,7 +23,7 @@ class TeachersViewController: UIViewController {
             return
         }
         let newTeacher = sourceViewController.newTeacher
-        teachers.append(newTeacher)
+        modelController.teachers.append(newTeacher)
         teachersView.reloadData()
     }
     
@@ -43,7 +35,7 @@ class TeachersViewController: UIViewController {
             return
         }
         if let indexPath = teachersView.indexPath(for: cell) {
-            let teacher = teachers[indexPath.row]
+            let teacher = modelController.teachers[indexPath.row]
             teacherDetailController.teacher = teacher
         }
     }
@@ -53,19 +45,23 @@ class TeachersViewController: UIViewController {
 extension TeachersViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return teachers.count
+        return modelController.teachers.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TeacherCell", for: indexPath) as! TeacherCell
-        cell.viewModel = TeacherCell.ViewModel(teacher: teachers[indexPath.item])
+        let teacher = modelController.teachers[indexPath.item]
+        cell.viewModel = TeacherCell.ViewModel(teacher: teacher)
         return cell
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         switch editingStyle {
         case .delete:
-            teachers.remove(at: indexPath.item)
+            let removedTeacher = modelController.teachers.remove(at: indexPath.item)
+            modelController.schedules = modelController.schedules.filter { schedule in
+                schedule.course.teacher != removedTeacher
+            }
             tableView.reloadData()
         default:
             return

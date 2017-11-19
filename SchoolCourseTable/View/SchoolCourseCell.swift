@@ -31,7 +31,7 @@ class SchoolCourseCell: UICollectionViewCell {
     var viewModel: ViewModel {
         didSet {
             subjectLabel.text = viewModel.subject
-            teacherNameLabel.text = viewModel.teacherName
+            teacherNameLabel?.text = viewModel.teacherName
         }
     }
 }

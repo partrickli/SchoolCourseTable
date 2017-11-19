@@ -11,12 +11,16 @@ import UIKit
 
 class CourseSelectionDataSource: NSObject {
     
-    var courses: [Course] = []
-    
-    func reloadData() {
-        let storage = StorageController()
-        courses = storage.availableCourses
+    let modelController: ModelController
+    var courses: [Course] {
+        return modelController.availableCourses
     }
+    
+    init(_ modelController: ModelController) {
+        self.modelController = modelController
+    }
+    
+
 }
 
 extension CourseSelectionDataSource: UICollectionViewDataSource {

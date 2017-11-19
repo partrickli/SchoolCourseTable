@@ -13,42 +13,41 @@ class CourseTableDataSource: NSObject {
     private let classCountPerGrade = 5
     private let courseCountPerDay = 7
     private let workDayCountPerWeek = 5
-    private var courses: [Matrix<Course>]
-    private let storage = StorageController()
+    private var courses: [Matrix<Course>] {
+        didSet {
+            let schedules = courses.enumerated().flatMap { (section, matrix) -> [Schedule] in
+                
+                return matrix.grid.enumerated().map { index, course in
+                    let (row, column) = matrix.convert(index: index)
+                    let gradeClass = GradeClass(grade: 1, classInGrade: column + 1)
+                    let time = ScheduleTime(day: section + 1, order: row + 1)
+                    return Schedule(course: course, time: time, gradeClass: gradeClass)
+                }
+            }
+            
+            let emptyCourse = Course()
+            modelController.schedules = schedules.filter { $0.course != emptyCourse }
+        }
+    }
+    private let modelController: ModelController
     
-    override init() {
+    init(_ modelController: ModelController) {
+        self.modelController = modelController
         let coursesPerDay = Matrix(repeating: Course(), rows: courseCountPerDay, columns: classCountPerGrade)
         courses = Array(repeating: coursesPerDay, count: workDayCountPerWeek)
         super.init()
+        reloadCourses()
     }
     
     private func reloadCourses() {
-        guard let schedules = storage.allSchedules else {
-            return
-        }
         
-        for schedule in schedules {
+        for schedule in modelController.schedules {
             let row = schedule.time.order - 1
             let column = schedule.gradeClass.classInGrade - 1
             let section = schedule.time.day - 1
             courses[section][row, column] = schedule.course
         }
     }
-    
-    private func saveCourses() {
-        let schedules = courses.enumerated().flatMap { (section, matrix) -> [Schedule] in
-            
-            return matrix.grid.enumerated().map { index, course in
-                let (row, column) = matrix.convert(index: index)
-                let gradeClass = GradeClass(grade: 1, classInGrade: column + 1)
-                let time = ScheduleTime(day: section + 1, order: row + 1)
-                return Schedule(course: course, time: time, gradeClass: gradeClass)
-            }
-
-        }
-        storage.schedulesResource.save(value: schedules)
-    }
-    
     
 }
 

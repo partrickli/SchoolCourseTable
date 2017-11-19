@@ -8,50 +8,66 @@
 
 import Foundation
 
-class StorageController {
+class ModelController {
     
+    var teachers: [Teacher]
+    var schedules: [Schedule]
+    
+    init() {
+        teachers = teachersResource.reload() ?? []
+        schedules = schedulesResource.reload() ?? []
+    }
+    
+    static let shared = ModelController()
+    
+    // storage
     struct Resource<Model: Codable> {
         let documentDirectoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         let urlFileName: String
         var url: URL {
-            return documentDirectoryURL.appendingPathComponent("teachers").appendingPathExtension("plist")
+            return documentDirectoryURL.appendingPathComponent(urlFileName).appendingPathExtension("plist")
         }
         
         func save(value: [Model]) {
             if let data = value.encodeToPlist() {
-                try? data.write(to: url)
+                do {
+                    try data.write(to: url)
+                    print("saving \(type(of: value))succeeded.")
+                    print(value)
+                } catch {
+                    print("saving \(value)")
+                    print(error)
+                }
             }
         }
         
         func reload() -> [Model]? {
             if let data = try? Data(contentsOf: url) {
                 return [Model].decodeFromPlist(data: data)
+            } else {
+                return nil
             }
-            return nil
         }
 
     }
     
     let schedulesResource = Resource<Schedule>(urlFileName: "schedules")
     let teachersResource = Resource<Teacher>(urlFileName: "teachers")
+    
+    func save() {
+        teachersResource.save(value: teachers)
+        schedulesResource.save(value: schedules)
+    }
 
 }
 
-extension StorageController {
+extension ModelController {
     var availableCourses: [Course] {
-        if let teachers: [Teacher] = teachersResource.reload() {
-            let courses = teachers.flatMap { teacher -> [Course] in
-                let nonzeroSubjects = teacher.subjectCount.filter { $0.value > 0 }.keys
-                return nonzeroSubjects.map { Course(teacher: teacher, subject: $0) }
-            }
-            return courses
-        } else {
-            return []
+        let courses = teachers.flatMap { teacher -> [Course] in
+            let nonzeroSubjects = teacher.subjectCount.filter { $0.value > 0 }.keys
+            return nonzeroSubjects.map { Course(teacher: teacher, subject: $0) }
         }
-    }
-    
-    var allSchedules: [Schedule]? {
-        return schedulesResource.reload()
+        return courses
     }
 }
 

@@ -10,6 +10,7 @@ import UIKit
 
 class CourseTableViewController: UIViewController {
     
+    let modelController = ModelController.shared
     var courseTableDataSource: CourseTableDataSource!
     var courseSelectionDataSource: CourseSelectionDataSource!
     
@@ -20,10 +21,10 @@ class CourseTableViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        courseTableDataSource = CourseTableDataSource()
+        courseTableDataSource = CourseTableDataSource(modelController)
         courseTableCollectionView.dataSource = courseTableDataSource
         
-        courseSelectionDataSource = CourseSelectionDataSource()
+        courseSelectionDataSource = CourseSelectionDataSource(modelController)
         courseSelectionCollectionView.dataSource = courseSelectionDataSource
         
         courseTableCollectionView.register(CourseTableHeaderView.self, forSupplementaryViewOfKind: CourseTableLayout.Element.TableHeader.kind, withReuseIdentifier: "CourseTableHeader")
@@ -44,7 +45,6 @@ class CourseTableViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        courseSelectionDataSource.reloadData()
         courseSelectionCollectionView.reloadData()
     }
     

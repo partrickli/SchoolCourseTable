@@ -19,12 +19,13 @@
 		C01A530E1F78A1C20020A83C /* SchoolCourseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01A530D1F78A1C20020A83C /* SchoolCourseCell.swift */; };
 		C01A53101F78A4180020A83C /* CourseTableLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01A530F1F78A4180020A83C /* CourseTableLayout.swift */; };
 		C01DB93A1FA86D05006A4090 /* TeacherDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01DB9391FA86D05006A4090 /* TeacherDetailController.swift */; };
+		C059F9F71FC128F1006B37E5 /* CourseTableOfTeacher.swift in Sources */ = {isa = PBXBuildFile; fileRef = C059F9F61FC128F1006B37E5 /* CourseTableOfTeacher.swift */; };
+		C059F9F91FC15828006B37E5 /* PersonalCourseTableLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = C059F9F81FC15828006B37E5 /* PersonalCourseTableLayout.swift */; };
 		C08B89FE1FB0379D007D07DA /* TeacherDetailScheduleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08B89FD1FB0379D007D07DA /* TeacherDetailScheduleCell.swift */; };
 		C08B8A001FB03863007D07DA /* TeacherCourseTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08B89FF1FB03863007D07DA /* TeacherCourseTableCell.swift */; };
 		C08B8A021FB04872007D07DA /* CourseTableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08B8A011FB04872007D07DA /* CourseTableDataSource.swift */; };
-		C08B8A041FB05A66007D07DA /* TeacherPersonalCourseTableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08B8A031FB05A66007D07DA /* TeacherPersonalCourseTableDataSource.swift */; };
 		C08B8A061FB14DD1007D07DA /* DataStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08B8A051FB14DD1007D07DA /* DataStructure.swift */; };
-		C08B8A091FB2A569007D07DA /* StorageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08B8A081FB2A569007D07DA /* StorageController.swift */; };
+		C08B8A091FB2A569007D07DA /* ModelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08B8A081FB2A569007D07DA /* ModelController.swift */; };
 		C08CBAC91F8F80BA00333532 /* TeacherEditorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08CBAC81F8F80BA00333532 /* TeacherEditorController.swift */; };
 		C0F32DE11F7B9C440024226B /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F32DE01F7B9C440024226B /* Model.swift */; };
 		C0F32DE31F7B9E4C0024226B /* TeacherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F32DE21F7B9E4C0024226B /* TeacherCell.swift */; };
@@ -45,12 +46,13 @@
 		C01A530D1F78A1C20020A83C /* SchoolCourseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SchoolCourseCell.swift; sourceTree = "<group>"; };
 		C01A530F1F78A4180020A83C /* CourseTableLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseTableLayout.swift; sourceTree = "<group>"; };
 		C01DB9391FA86D05006A4090 /* TeacherDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherDetailController.swift; sourceTree = "<group>"; };
+		C059F9F61FC128F1006B37E5 /* CourseTableOfTeacher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseTableOfTeacher.swift; sourceTree = "<group>"; };
+		C059F9F81FC15828006B37E5 /* PersonalCourseTableLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalCourseTableLayout.swift; sourceTree = "<group>"; };
 		C08B89FD1FB0379D007D07DA /* TeacherDetailScheduleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherDetailScheduleCell.swift; sourceTree = "<group>"; };
 		C08B89FF1FB03863007D07DA /* TeacherCourseTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherCourseTableCell.swift; sourceTree = "<group>"; };
 		C08B8A011FB04872007D07DA /* CourseTableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CourseTableDataSource.swift; path = "SchoolCourseTable/New Group/CourseTableDataSource.swift"; sourceTree = SOURCE_ROOT; };
-		C08B8A031FB05A66007D07DA /* TeacherPersonalCourseTableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherPersonalCourseTableDataSource.swift; sourceTree = "<group>"; };
 		C08B8A051FB14DD1007D07DA /* DataStructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStructure.swift; sourceTree = "<group>"; };
-		C08B8A081FB2A569007D07DA /* StorageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageController.swift; sourceTree = "<group>"; };
+		C08B8A081FB2A569007D07DA /* ModelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelController.swift; sourceTree = "<group>"; };
 		C08CBAC81F8F80BA00333532 /* TeacherEditorController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherEditorController.swift; sourceTree = "<group>"; };
 		C0F32DE01F7B9C440024226B /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		C0F32DE21F7B9E4C0024226B /* TeacherCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherCell.swift; sourceTree = "<group>"; };
@@ -86,6 +88,7 @@
 		C01A52F61F789F2D0020A83C /* SchoolCourseTable */ = {
 			isa = PBXGroup;
 			children = (
+				C059F9F51FBEB599006B37E5 /* ModelController */,
 				C09E98531FAB3A13002F9282 /* ViewController */,
 				C062CDF11FBD2C6B00F88999 /* DataSource */,
 				C08B8A071FB14DE5007D07DA /* Util */,
@@ -101,12 +104,20 @@
 			path = SchoolCourseTable;
 			sourceTree = "<group>";
 		};
+		C059F9F51FBEB599006B37E5 /* ModelController */ = {
+			isa = PBXGroup;
+			children = (
+				C08B8A081FB2A569007D07DA /* ModelController.swift */,
+			);
+			path = ModelController;
+			sourceTree = "<group>";
+		};
 		C062CDF11FBD2C6B00F88999 /* DataSource */ = {
 			isa = PBXGroup;
 			children = (
 				C08B8A011FB04872007D07DA /* CourseTableDataSource.swift */,
+				C059F9F61FC128F1006B37E5 /* CourseTableOfTeacher.swift */,
 				C0143DAE1FBB42CC006FD4FF /* CourseSelectionDataSource.swift */,
-				C08B8A031FB05A66007D07DA /* TeacherPersonalCourseTableDataSource.swift */,
 			);
 			name = DataSource;
 			path = "New Group";
@@ -123,7 +134,6 @@
 		C09E98521FAB39E4002F9282 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				C08B8A081FB2A569007D07DA /* StorageController.swift */,
 				C0F32DE01F7B9C440024226B /* Model.swift */,
 			);
 			path = Model;
@@ -157,6 +167,7 @@
 			isa = PBXGroup;
 			children = (
 				C01A530F1F78A4180020A83C /* CourseTableLayout.swift */,
+				C059F9F81FC15828006B37E5 /* PersonalCourseTableLayout.swift */,
 			);
 			path = Layout;
 			sourceTree = "<group>";
@@ -237,7 +248,7 @@
 			files = (
 				C01A530E1F78A1C20020A83C /* SchoolCourseCell.swift in Sources */,
 				C08B8A001FB03863007D07DA /* TeacherCourseTableCell.swift in Sources */,
-				C08B8A091FB2A569007D07DA /* StorageController.swift in Sources */,
+				C08B8A091FB2A569007D07DA /* ModelController.swift in Sources */,
 				C08B8A061FB14DD1007D07DA /* DataStructure.swift in Sources */,
 				C01A52FC1F789F2D0020A83C /* TeachersViewController.swift in Sources */,
 				C01A52F81F789F2D0020A83C /* AppDelegate.swift in Sources */,
@@ -249,9 +260,10 @@
 				C01A53101F78A4180020A83C /* CourseTableLayout.swift in Sources */,
 				C08CBAC91F8F80BA00333532 /* TeacherEditorController.swift in Sources */,
 				C01A52FA1F789F2D0020A83C /* CourseTableViewController.swift in Sources */,
-				C08B8A041FB05A66007D07DA /* TeacherPersonalCourseTableDataSource.swift in Sources */,
 				C08B89FE1FB0379D007D07DA /* TeacherDetailScheduleCell.swift in Sources */,
+				C059F9F71FC128F1006B37E5 /* CourseTableOfTeacher.swift in Sources */,
 				C0F32DE31F7B9E4C0024226B /* TeacherCell.swift in Sources */,
+				C059F9F91FC15828006B37E5 /* PersonalCourseTableLayout.swift in Sources */,
 				C08B8A021FB04872007D07DA /* CourseTableDataSource.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
