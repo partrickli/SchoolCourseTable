@@ -22,7 +22,6 @@
 		C059F9F71FC128F1006B37E5 /* CourseTableOfTeacher.swift in Sources */ = {isa = PBXBuildFile; fileRef = C059F9F61FC128F1006B37E5 /* CourseTableOfTeacher.swift */; };
 		C059F9F91FC15828006B37E5 /* PersonalCourseTableLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = C059F9F81FC15828006B37E5 /* PersonalCourseTableLayout.swift */; };
 		C08B89FE1FB0379D007D07DA /* TeacherDetailScheduleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08B89FD1FB0379D007D07DA /* TeacherDetailScheduleCell.swift */; };
-		C08B8A001FB03863007D07DA /* TeacherCourseTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08B89FF1FB03863007D07DA /* TeacherCourseTableCell.swift */; };
 		C08B8A021FB04872007D07DA /* CourseTableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08B8A011FB04872007D07DA /* CourseTableDataSource.swift */; };
 		C08B8A061FB14DD1007D07DA /* DataStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08B8A051FB14DD1007D07DA /* DataStructure.swift */; };
 		C08B8A091FB2A569007D07DA /* ModelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08B8A081FB2A569007D07DA /* ModelController.swift */; };
@@ -49,7 +48,6 @@
 		C059F9F61FC128F1006B37E5 /* CourseTableOfTeacher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseTableOfTeacher.swift; sourceTree = "<group>"; };
 		C059F9F81FC15828006B37E5 /* PersonalCourseTableLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalCourseTableLayout.swift; sourceTree = "<group>"; };
 		C08B89FD1FB0379D007D07DA /* TeacherDetailScheduleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherDetailScheduleCell.swift; sourceTree = "<group>"; };
-		C08B89FF1FB03863007D07DA /* TeacherCourseTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherCourseTableCell.swift; sourceTree = "<group>"; };
 		C08B8A011FB04872007D07DA /* CourseTableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CourseTableDataSource.swift; path = "SchoolCourseTable/New Group/CourseTableDataSource.swift"; sourceTree = SOURCE_ROOT; };
 		C08B8A051FB14DD1007D07DA /* DataStructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStructure.swift; sourceTree = "<group>"; };
 		C08B8A081FB2A569007D07DA /* ModelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelController.swift; sourceTree = "<group>"; };
@@ -155,7 +153,6 @@
 			children = (
 				C0F32DE21F7B9E4C0024226B /* TeacherCell.swift */,
 				C01A530D1F78A1C20020A83C /* SchoolCourseCell.swift */,
-				C08B89FF1FB03863007D07DA /* TeacherCourseTableCell.swift */,
 				C001E9D51F7CDEA5007E6867 /* CourseTableHeaderView.swift */,
 				C08B89FD1FB0379D007D07DA /* TeacherDetailScheduleCell.swift */,
 				C001E9D71F7E1B76007E6867 /* CourseTableView.swift */,
@@ -247,7 +244,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				C01A530E1F78A1C20020A83C /* SchoolCourseCell.swift in Sources */,
-				C08B8A001FB03863007D07DA /* TeacherCourseTableCell.swift in Sources */,
 				C08B8A091FB2A569007D07DA /* ModelController.swift in Sources */,
 				C08B8A061FB14DD1007D07DA /* DataStructure.swift in Sources */,
 				C01A52FC1F789F2D0020A83C /* TeachersViewController.swift in Sources */,

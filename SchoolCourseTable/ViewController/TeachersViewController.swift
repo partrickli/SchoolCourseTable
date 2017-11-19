@@ -27,6 +27,10 @@ class TeachersViewController: UIViewController {
         teachersView.reloadData()
     }
     
+    @IBAction func cancelEditor(sender: UIStoryboardSegue) {
+        print("editor dismissed")
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let teacherDetailController = segue.destination as? TeacherDetailController else {
             return
